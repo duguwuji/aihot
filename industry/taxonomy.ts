@@ -1,139 +1,565 @@
-// 这个行业的分类体系：类别、标签词表、公司（主体）名录，以及防止张冠李戴的身份词典。
-// 模型按这里的词表打标签，主题页（topics.json）按标签归类，筛选栏按类别分组。
-// 换行业时：类别的 key 会出现在网址里（/all?category=…），上线后就不要再改；标签和名录可以随时增减。
-
-/**
- * 网页上的类别（筛选栏、卡片角标、RSS 分类订阅）。key 是网址和接口里的身份，上线后不要改。
- * section 是日报里的分节标题（几个类别可以共用一节，按这里的顺序排）；guide 告诉模型怎么归类。
- * 没归上类的资料在日报里放进第一个 key 为 industry 的类别所在的节（没有就放最后一节）。
- */
+// RFID 行业词表。类别 key、主题 slug 和主体 id 一经上线应保持稳定。
 export const CATEGORIES = [
-  { key: "ai-models", label: "模型", section: "模型发布/更新", guide: "新模型、模型版本、权重开放、模型能力与价格变化的发布与评测结果" },
-  { key: "ai-products", label: "产品", section: "产品发布/更新", guide: "AI 产品、功能、应用、工具、API 与平台的发布和更新" },
-  { key: "industry", label: "行业", section: "行业动态", guide: "公司经营、融资并购、人事、合作、诉讼、监管与政策、市场与基础设施" },
-  { key: "paper", label: "论文", section: "论文研究", guide: "研究论文、技术报告、基准与数据集" },
-  { key: "tip", label: "教程", section: "技巧与观点", guide: "教程、实践经验、使用技巧、提示词与工具用法、深度技术讲解" },
-  { key: "opinion", label: "观点", section: "技巧与观点", guide: "人物观点、评论、分析、访谈、现象与趋势讨论" },
+  {
+    "key": "technology",
+    "label": "技术产品",
+    "section": "技术与产品",
+    "guide": "RFID 芯片、标签、天线、读写器、传感器、协议与软件平台的发布、参数和工程能力变化"
+  },
+  {
+    "key": "deployments",
+    "label": "应用部署",
+    "section": "应用与部署",
+    "guide": "零售、物流、工业、医药、航空等场景的试点、采购要求、规模部署与运营结果；明确区分计划和落地"
+  },
+  {
+    "key": "industry",
+    "label": "企业动态",
+    "section": "企业与生态",
+    "guide": "RFID 产业公司的财报、产能、并购、融资、供应商合作、资产转让与商业模式变化"
+  },
+  {
+    "key": "standards",
+    "label": "标准法规",
+    "section": "标准与法规",
+    "guide": "GS1、RAIN Alliance、ISO/IEC、3GPP 与监管规则；频谱、认证、ESPR/DPP、PPWR，注明地区和阶段"
+  },
+  {
+    "key": "research",
+    "label": "研究方法",
+    "section": "研究与实践",
+    "guide": "RFID/IoT 论文、白皮书、测试方法、集成经验和基于证据的产业分析；RFID+AI 库存真值与补货预测"
+  }
 ] as const;
-
-/**
- * 内容理解一步给每篇资料判的“内容类型”（写在 prompts/content-understanding.md 里，改了类型要同步改那份提示词）。
- * 评分提示词（prompts/selection-score.md）按类型给五个维度不同的权重。
- */
-export const ITEM_TYPES = ["model_release", "product_launch", "tool_or_prompt", "research_paper", "industry_event", "opinion_analysis", "tutorial_explainer"] as const;
-
-// ── 标签词表 ────────────────────────────────────────────────────────────────────────────
-
-/** 每篇资料的第一个标签必须是这些“分类标签”之一。 */
+export const ITEM_TYPES = [
+  "technology_release",
+  "product_launch",
+  "integration_tool",
+  "research_paper",
+  "industry_event",
+  "opinion_analysis",
+  "tutorial_explainer"
+] as const;
 export const CATEGORY_TAGS = [
-  "产品更新", "模型发布", "论文/研究", "开源/仓库", "教程/实践", "现象/趋势", "大佬观点", "评测/基准", "安全/对齐", "行业动态", "政策/监管",
-  "非AI/通用工具", "其他",
+  "技术发布",
+  "产品更新",
+  "应用部署",
+  "行业动态",
+  "标准/法规",
+  "论文/研究",
+  "教程/实践",
+  "评测/基准",
+  "观点/分析",
+  "开源/仓库",
+  "其他"
 ] as const;
-
-/** 可选的主题标签。 */
 export const TOPIC_TAGS = [
-  "Agent", "编码", "推理", "多模态", "语音", "视频", "图像生成", "RAG", "端侧", "数据/训练", "搜索", "部署/工程", "开源生态", "具身智能", "MCP/工具调用",
+  "RAIN RFID",
+  "HF/NFC",
+  "Ambient IoT",
+  "RFID+AI",
+  "芯片/SoC",
+  "标签/天线",
+  "读写器",
+  "测试/质量",
+  "库存真值",
+  "补货预测",
+  "零售/服装",
+  "物流/仓储",
+  "工业物联网",
+  "医药/医疗",
+  "航空/汽车",
+  "冷链",
+  "智能包装",
+  "DPP",
+  "GS1 Digital Link",
+  "EPCIS",
+  "PPWR",
+  "循环包装",
+  "数据安全",
+  "集成/工程"
+] as const;
+export const ENTITY_TAGS = [
+  "Impinj",
+  "Zebra",
+  "Avery Dennison",
+  "Wiliot",
+  "NXP",
+  "Alien Technology",
+  "HID",
+  "Sensormatic",
+  "Checkpoint",
+  "SML",
+  "Tageos",
+  "Identiv",
+  "Trackonomy",
+  "Beontag",
+  "Xerafy",
+  "CAEN RFID",
+  "Voyantic",
+  "Nordic ID",
+  "Chainway",
+  "Hopeland",
+  "Invengo",
+  "复旦微电子",
+  "Qualcomm",
+  "Walmart",
+  "Decathlon",
+  "Inditex",
+  "GS1",
+  "RAIN Alliance",
+  "AIM",
+  "NFC Forum",
+  "3GPP"
 ] as const;
 
-/** 可选的实体标签（公司、机构、平台）。 */
-export const ENTITY_TAGS = ["OpenAI", "Anthropic", "DeepSeek", "DeepMind", "Google", "Meta", "Microsoft", "xAI", "Hugging Face", "GitHub", "arXiv"] as const;
-
-/** 模型常写的近义词，统一成词表里的写法。 */
 export const TAG_SYNONYMS: Readonly<Record<string, string>> = {
-  "教程/玩法": "教程/实践", "技巧/最佳实践": "教程/实践", "合作/生态": "行业动态", "融资/收购": "行业动态", "公司动态": "行业动态",
-  合作: "行业动态", 生态: "行业动态", 融资: "行业动态", 收购: "行业动态", 投资: "行业动态", 并购: "行业动态",
-  政策: "政策/监管", 监管: "政策/监管", 法规: "政策/监管", 安全: "安全/对齐", 对齐: "安全/对齐",
-  论文: "论文/研究", 研究: "论文/研究", paper: "论文/研究", papers: "论文/研究",
-  "open-source": "开源/仓库", 开源: "开源/仓库", 仓库: "开源/仓库", repo: "开源/仓库",
-  教程: "教程/实践", 玩法: "教程/实践", 指南: "教程/实践", 技巧: "教程/实践", 最佳实践: "教程/实践", 实践: "教程/实践",
-  产品: "产品更新", 更新: "产品更新", 发布: "模型发布", 模型: "模型发布", 趋势: "现象/趋势", 现象: "现象/趋势", 观点: "大佬观点",
-  视频生成: "视频", 非ai: "非AI/通用工具", "non-ai": "非AI/通用工具", 通用工具: "非AI/通用工具", 工程工具: "非AI/通用工具",
-  安全扫描: "非AI/通用工具", devops: "非AI/通用工具", 行业: "行业动态", 动态: "行业动态",
+  "rain": "RAIN RFID",
+  "rain rfid": "RAIN RFID",
+  "uhf": "RAIN RFID",
+  "uhf rfid": "RAIN RFID",
+  "超高频RFID": "RAIN RFID",
+  "nfc": "HF/NFC",
+  "hf": "HF/NFC",
+  "ambient iot": "Ambient IoT",
+  "rfid+ai": "RFID+AI",
+  "ground truth": "库存真值",
+  "库存Ground Truth": "库存真值",
+  "数字产品护照": "DPP",
+  "数字产品通行证": "DPP",
+  "dpp": "DPP",
+  "digital link": "GS1 Digital Link",
+  "epcis": "EPCIS",
+  "ppwr": "PPWR",
+  "艾利丹尼森": "Avery Dennison",
+  "斑马": "Zebra",
+  "恩智浦": "NXP",
+  "远望谷": "Invengo",
+  "复旦微": "复旦微电子",
+  "合作/生态": "行业动态",
+  "融资/收购": "行业动态",
+  "合作": "行业动态",
+  "融资": "行业动态",
+  "并购": "行业动态",
+  "收购": "行业动态",
+  "财报": "行业动态",
+  "政策": "标准/法规",
+  "监管": "标准/法规",
+  "法规": "标准/法规",
+  "标准": "标准/法规",
+  "政策/监管": "标准/法规",
+  "论文": "论文/研究",
+  "研究": "论文/研究",
+  "paper": "论文/研究",
+  "papers": "论文/研究",
+  "open-source": "开源/仓库",
+  "开源": "开源/仓库",
+  "仓库": "开源/仓库",
+  "教程": "教程/实践",
+  "指南": "教程/实践",
+  "实践": "教程/实践",
+  "技巧/最佳实践": "教程/实践",
+  "产品": "产品更新",
+  "更新": "产品更新",
+  "发布": "技术发布",
+  "部署": "应用部署",
+  "案例": "应用部署",
+  "评测": "评测/基准",
+  "测试": "测试/质量",
+  "观点": "观点/分析",
+  "趋势": "观点/分析",
+  "行业": "行业动态"
 };
-
-/** 模型漏了分类标签时，按内容类型补一个。 */
 export const CATEGORY_BY_ITEM_TYPE: Readonly<Record<string, string>> = {
-  model_release: "模型发布", product_launch: "产品更新", tool_or_prompt: "教程/实践", research_paper: "论文/研究",
-  industry_event: "行业动态", opinion_analysis: "大佬观点", tutorial_explainer: "教程/实践",
+  "technology_release": "技术发布",
+  "product_launch": "产品更新",
+  "integration_tool": "教程/实践",
+  "research_paper": "论文/研究",
+  "industry_event": "行业动态",
+  "opinion_analysis": "观点/分析",
+  "tutorial_explainer": "教程/实践"
 };
-
-// ── 公司与主体 ──────────────────────────────────────────────────────────────────────────
-
-/** 公司主题：id → 显示名、卡片上显示的标签（null 表示只用 entity:<id> 归类）、别名。 */
 export const ENTITIES: Record<string, { name: string; displayTag: string | null; aliases: string[] }> = {
-  openai: { name: "OpenAI", displayTag: "OpenAI", aliases: ["OpenAI", "ChatGPT", "Sora", "Codex", "GPT"] },
-  anthropic: { name: "Anthropic", displayTag: "Anthropic", aliases: ["Anthropic", "Claude"] },
-  google: { name: "Google", displayTag: "Google", aliases: ["Google", "DeepMind", "Gemini", "谷歌"] },
-  deepseek: { name: "DeepSeek", displayTag: "DeepSeek", aliases: ["DeepSeek", "深度求索"] },
-  qwen: { name: "千问 Qwen", displayTag: null, aliases: ["Qwen", "通义", "阿里"] },
-  kimi: { name: "Kimi / 月之暗面", displayTag: null, aliases: ["Kimi", "月之暗面", "Moonshot"] },
-  minimax: { name: "MiniMax", displayTag: null, aliases: ["MiniMax", "海螺"] },
-  zhipu: { name: "智谱 GLM", displayTag: null, aliases: ["智谱", "GLM", "Z.ai"] },
-  xai: { name: "xAI", displayTag: "xAI", aliases: ["xAI", "Grok"] },
-  meta: { name: "Meta", displayTag: "Meta", aliases: ["Meta", "Llama"] },
-  microsoft: { name: "Microsoft", displayTag: "Microsoft", aliases: ["Microsoft", "微软", "Copilot"] },
-  nvidia: { name: "NVIDIA", displayTag: null, aliases: ["NVIDIA", "英伟达"] },
-  "hugging-face": { name: "Hugging Face", displayTag: "Hugging Face", aliases: ["Hugging Face"] },
-  cursor: { name: "Cursor", displayTag: null, aliases: ["Cursor", "Anysphere"] },
-  openrouter: { name: "OpenRouter", displayTag: null, aliases: ["OpenRouter"] },
+  "impinj": {
+    "name": "Impinj",
+    "displayTag": "Impinj",
+    "aliases": [
+      "Impinj",
+      "英频杰"
+    ]
+  },
+  "zebra": {
+    "name": "Zebra",
+    "displayTag": "Zebra",
+    "aliases": [
+      "Zebra",
+      "Zebra Technologies",
+      "斑马技术"
+    ]
+  },
+  "avery-dennison": {
+    "name": "Avery Dennison",
+    "displayTag": "Avery Dennison",
+    "aliases": [
+      "Avery Dennison",
+      "Smartrac",
+      "艾利丹尼森"
+    ]
+  },
+  "wiliot": {
+    "name": "Wiliot",
+    "displayTag": "Wiliot",
+    "aliases": [
+      "Wiliot"
+    ]
+  },
+  "nxp": {
+    "name": "NXP",
+    "displayTag": "NXP",
+    "aliases": [
+      "NXP",
+      "恩智浦"
+    ]
+  },
+  "alien": {
+    "name": "Alien Technology",
+    "displayTag": "Alien Technology",
+    "aliases": [
+      "Alien Technology"
+    ]
+  },
+  "hid": {
+    "name": "HID",
+    "displayTag": "HID",
+    "aliases": [
+      "HID",
+      "HID Global"
+    ]
+  },
+  "sensormatic": {
+    "name": "Sensormatic",
+    "displayTag": "Sensormatic",
+    "aliases": [
+      "Sensormatic",
+      "先讯美资"
+    ]
+  },
+  "checkpoint": {
+    "name": "Checkpoint",
+    "displayTag": "Checkpoint",
+    "aliases": [
+      "Checkpoint",
+      "Checkpoint Systems",
+      "保点"
+    ]
+  },
+  "sml": {
+    "name": "SML",
+    "displayTag": "SML",
+    "aliases": [
+      "SML"
+    ]
+  },
+  "tageos": {
+    "name": "Tageos",
+    "displayTag": "Tageos",
+    "aliases": [
+      "Tageos"
+    ]
+  },
+  "identiv": {
+    "name": "Identiv",
+    "displayTag": "Identiv",
+    "aliases": [
+      "Identiv"
+    ]
+  },
+  "trackonomy": {
+    "name": "Trackonomy",
+    "displayTag": "Trackonomy",
+    "aliases": [
+      "Trackonomy"
+    ]
+  },
+  "beontag": {
+    "name": "Beontag",
+    "displayTag": "Beontag",
+    "aliases": [
+      "Beontag",
+      "Confidex"
+    ]
+  },
+  "xerafy": {
+    "name": "Xerafy",
+    "displayTag": "Xerafy",
+    "aliases": [
+      "Xerafy"
+    ]
+  },
+  "caen": {
+    "name": "CAEN RFID",
+    "displayTag": "CAEN RFID",
+    "aliases": [
+      "CAEN RFID"
+    ]
+  },
+  "voyantic": {
+    "name": "Voyantic",
+    "displayTag": "Voyantic",
+    "aliases": [
+      "Voyantic"
+    ]
+  },
+  "nordic-id": {
+    "name": "Nordic ID",
+    "displayTag": "Nordic ID",
+    "aliases": [
+      "Nordic ID"
+    ]
+  },
+  "chainway": {
+    "name": "Chainway",
+    "displayTag": "Chainway",
+    "aliases": [
+      "Chainway"
+    ]
+  },
+  "hopeland": {
+    "name": "Hopeland",
+    "displayTag": "Hopeland",
+    "aliases": [
+      "Hopeland"
+    ]
+  },
+  "invengo": {
+    "name": "Invengo",
+    "displayTag": "Invengo",
+    "aliases": [
+      "Invengo",
+      "远望谷"
+    ]
+  },
+  "fudan": {
+    "name": "复旦微电子",
+    "displayTag": "复旦微电子",
+    "aliases": [
+      "复旦微电子",
+      "Fudan Microelectronics",
+      "复旦微"
+    ]
+  },
+  "qualcomm": {
+    "name": "Qualcomm",
+    "displayTag": "Qualcomm",
+    "aliases": [
+      "Qualcomm",
+      "高通"
+    ]
+  },
+  "walmart": {
+    "name": "Walmart",
+    "displayTag": "Walmart",
+    "aliases": [
+      "Walmart",
+      "Wal-Mart",
+      "沃尔玛"
+    ]
+  },
+  "decathlon": {
+    "name": "Decathlon",
+    "displayTag": "Decathlon",
+    "aliases": [
+      "Decathlon",
+      "迪卡侬"
+    ]
+  },
+  "inditex": {
+    "name": "Inditex",
+    "displayTag": "Inditex",
+    "aliases": [
+      "Inditex",
+      "Zara"
+    ]
+  },
+  "gs1": {
+    "name": "GS1",
+    "displayTag": "GS1",
+    "aliases": [
+      "GS1",
+      "EPCglobal"
+    ]
+  },
+  "rain-alliance": {
+    "name": "RAIN Alliance",
+    "displayTag": "RAIN Alliance",
+    "aliases": [
+      "RAIN Alliance",
+      "RAIN RFID Alliance"
+    ]
+  },
+  "aim": {
+    "name": "AIM",
+    "displayTag": "AIM",
+    "aliases": [
+      "AIM",
+      "AIM Global",
+      "AIM Inc."
+    ]
+  },
+  "nfc-forum": {
+    "name": "NFC Forum",
+    "displayTag": "NFC Forum",
+    "aliases": [
+      "NFC Forum"
+    ]
+  },
+  "3gpp": {
+    "name": "3GPP",
+    "displayTag": "3GPP",
+    "aliases": [
+      "3GPP"
+    ]
+  }
 };
 
-/**
- * 身份词典：摘要和标题里出现的公司，必须在原文里也出现过，否则退回原标题、丢掉摘要（防止模型张冠李戴）。
- * 行业没有这个问题时可以留空数组。
- */
+// 只认名称及明确别名，不把协议、频段或通用型号当作一家公司的专属身份。
 export const IDENTITY_LEXICON: ReadonlyArray<{ id: string; name: string; patterns: RegExp[] }> = [
-  { id: "openai", name: "OpenAI", patterns: [/openai|chatgpt|\bgpt-?[o\d]|\bsora\b|\bcodex\b/i] },
-  { id: "anthropic", name: "Anthropic", patterns: [/anthropic|\bclaude\b/i, /\b(?:opus|sonnet|haiku)\s*\d+(?:[.\-]\d+)*\b/i, /\bfable\s*\d+(?:[.\-]\d+)*\b|\bmythos\b/i] },
-  { id: "google", name: "Google / Gemini", patterns: [/google|deepmind|\bgemini\b|notebooklm|\bveo\s?\d|\bAlphaFold\b|\bAMIE\b/i] },
-  { id: "deepseek", name: "DeepSeek", patterns: [/deepseek|深度求索/i] },
-  { id: "xai", name: "xAI / Grok", patterns: [/\bxai\b|\bgrok\b/i] },
-  { id: "meta", name: "Meta / Llama", patterns: [/\bMeta\b/, /\bmeta\s?ai\b|\bllama\b/i] },
-  { id: "microsoft", name: "Microsoft / Copilot", patterns: [/microsoft|copilot|微软/i] },
-  { id: "nvidia", name: "NVIDIA", patterns: [/nvidia|英伟达|\bnemotron\b|\bnemo\b|\bblackwell\b|\brubin(?:\s+ultra)?\b|\bcuda\b/i] },
-  { id: "qwen", name: "千问 Qwen", patterns: [/\bqwen|通义|千问/i] },
-  { id: "hugging-face", name: "Hugging Face", patterns: [/hugging\s?face/i] },
-  { id: "cursor", name: "Cursor", patterns: [/\bCursor\b/] },
-  { id: "kimi", name: "Kimi / 月之暗面", patterns: [/\bkimi\b|月之暗面|\bmoonshot\s?ai\b/i] },
-  { id: "openrouter", name: "OpenRouter", patterns: [/openrouter/i] },
-  { id: "minimax", name: "MiniMax", patterns: [/minimax/i] },
-  { id: "zhipu", name: "智谱 GLM", patterns: [/智谱|\bglm-?[4-9]/i] },
-  { id: "hunyuan", name: "腾讯混元", patterns: [/混元|hunyuan/i] },
-  { id: "doubao", name: "字节豆包", patterns: [/豆包|doubao|字节跳动|bytedance/i] },
-  { id: "mistral", name: "Mistral", patterns: [/mistral/i] },
-  { id: "perplexity", name: "Perplexity", patterns: [/\bPerplexity\b/] },
-  { id: "runway", name: "Runway", patterns: [/\brunway\b/i] },
-  { id: "suno", name: "Suno", patterns: [/\bsuno\b/i] },
-  { id: "midjourney", name: "Midjourney", patterns: [/midjourney/i] },
-  { id: "stability-ai", name: "Stability AI", patterns: [/stability\s?ai/i] },
-  { id: "elevenlabs", name: "ElevenLabs", patterns: [/eleven\s?labs/i] },
-  { id: "vllm", name: "vLLM", patterns: [/\bvllm\b/i] },
-  { id: "ollama", name: "Ollama", patterns: [/\bollama\b/i] },
-  { id: "windsurf", name: "Windsurf", patterns: [/windsurf/i] },
-  { id: "devin", name: "Devin", patterns: [/\bdevin\b/i] },
-  { id: "manus", name: "Manus", patterns: [/\bmanus\b/i] },
-  { id: "apple", name: "Apple AI", patterns: [/\bapple\s?(intelligence|silicon|ai)\b|苹果(智能|\s?AI)/i] },
-  { id: "amazon", name: "Amazon / AWS", patterns: [/amazon|\baws\b|亚马逊/i] },
-  { id: "baidu", name: "百度文心", patterns: [/百度|baidu|文心|\bernie\s?bot\b/i] },
+  { id: "impinj", name: "Impinj", patterns: [/\bImpinj\b/i, /英频杰/i] },
+  { id: "zebra", name: "Zebra", patterns: [/\bZebra\b/i, /\bZebra\s+Technologies\b/i, /斑马技术/i] },
+  { id: "avery-dennison", name: "Avery Dennison", patterns: [/\bAvery\s+Dennison\b/i, /\bSmartrac\b/i, /艾利丹尼森/i] },
+  { id: "wiliot", name: "Wiliot", patterns: [/\bWiliot\b/i] },
+  { id: "nxp", name: "NXP", patterns: [/\bNXP\b/i, /恩智浦/i] },
+  { id: "alien", name: "Alien Technology", patterns: [/\bAlien\s+Technology\b/i] },
+  { id: "hid", name: "HID", patterns: [/\bHID\b/, /\bHID\s+Global\b/] },
+  { id: "sensormatic", name: "Sensormatic", patterns: [/\bSensormatic\b/i, /先讯美资/i] },
+  { id: "checkpoint", name: "Checkpoint", patterns: [/\bCheckpoint\s+Systems\b/i, /保点/i] },
+  { id: "sml", name: "SML", patterns: [/\bSML\b/] },
+  { id: "tageos", name: "Tageos", patterns: [/\bTageos\b/i] },
+  { id: "identiv", name: "Identiv", patterns: [/\bIdentiv\b/i] },
+  { id: "trackonomy", name: "Trackonomy", patterns: [/\bTrackonomy\b/i] },
+  { id: "beontag", name: "Beontag", patterns: [/\bBeontag\b/i, /\bConfidex\b/i] },
+  { id: "xerafy", name: "Xerafy", patterns: [/\bXerafy\b/i] },
+  { id: "caen", name: "CAEN RFID", patterns: [/\bCAEN\s+RFID\b/i] },
+  { id: "voyantic", name: "Voyantic", patterns: [/\bVoyantic\b/i] },
+  { id: "nordic-id", name: "Nordic ID", patterns: [/\bNordic\s+ID\b/i] },
+  { id: "chainway", name: "Chainway", patterns: [/\bChainway\b/i] },
+  { id: "hopeland", name: "Hopeland", patterns: [/\bHopeland\b/i] },
+  { id: "invengo", name: "Invengo", patterns: [/\bInvengo\b/i, /远望谷/i] },
+  { id: "fudan", name: "复旦微电子", patterns: [/复旦微电子/i, /\bFudan\s+Microelectronics\b/i, /复旦微/i] },
+  { id: "qualcomm", name: "Qualcomm", patterns: [/\bQualcomm\b/i, /高通/i] },
+  { id: "walmart", name: "Walmart", patterns: [/\bWalmart\b/i, /\bWal-Mart\b/i, /沃尔玛/i] },
+  { id: "decathlon", name: "Decathlon", patterns: [/\bDecathlon\b/i, /迪卡侬/i] },
+  { id: "inditex", name: "Inditex", patterns: [/\bInditex\b/i, /\bZara\b/i] },
+  { id: "gs1", name: "GS1", patterns: [/\bGS1\b/i, /\bEPCglobal\b/i] },
+  { id: "rain-alliance", name: "RAIN Alliance", patterns: [/\bRAIN\s+Alliance\b/i, /\bRAIN\s+RFID\s+Alliance\b/i] },
+  { id: "aim", name: "AIM", patterns: [/\bAIM\s+Global\b/i, /\bAIM\s+Inc\.\b/i] },
+  { id: "nfc-forum", name: "NFC Forum", patterns: [/\bNFC\s+Forum\b/i] },
+  { id: "3gpp", name: "3GPP", patterns: [/\b3GPP\b/i] },
 ];
-
-/** 这些域名上的文章，发布方就是对应的公司（托管平台如 GitHub、arXiv 不算）。 */
 export const PUBLISHER_DOMAINS: ReadonlyArray<{ entityId: string; domains: readonly string[] }> = [
-  { entityId: "openai", domains: ["openai.com"] },
-  { entityId: "anthropic", domains: ["anthropic.com", "claude.com"] },
-  { entityId: "google", domains: ["deepmind.google", "ai.google", "blog.google"] },
-  { entityId: "deepseek", domains: ["deepseek.com"] },
-  { entityId: "xai", domains: ["x.ai"] },
-  { entityId: "meta", domains: ["ai.meta.com"] },
-  { entityId: "microsoft", domains: ["microsoft.com"] },
-  { entityId: "nvidia", domains: ["nvidia.com"] },
-  { entityId: "qwen", domains: ["qwen.ai"] },
-  { entityId: "cursor", domains: ["cursor.com"] },
-  { entityId: "openrouter", domains: ["openrouter.ai"] },
+  {
+    "entityId": "impinj",
+    "domains": [
+      "impinj.com"
+    ]
+  },
+  {
+    "entityId": "zebra",
+    "domains": [
+      "zebra.com"
+    ]
+  },
+  {
+    "entityId": "avery-dennison",
+    "domains": [
+      "averydennison.com"
+    ]
+  },
+  {
+    "entityId": "wiliot",
+    "domains": [
+      "wiliot.com"
+    ]
+  },
+  {
+    "entityId": "nxp",
+    "domains": [
+      "nxp.com"
+    ]
+  },
+  {
+    "entityId": "tageos",
+    "domains": [
+      "tageos.com"
+    ]
+  },
+  {
+    "entityId": "identiv",
+    "domains": [
+      "identiv.com"
+    ]
+  },
+  {
+    "entityId": "beontag",
+    "domains": [
+      "beontag.com",
+      "confidex.com"
+    ]
+  },
+  {
+    "entityId": "voyantic",
+    "domains": [
+      "voyantic.com"
+    ]
+  },
+  {
+    "entityId": "xerafy",
+    "domains": [
+      "xerafy.com"
+    ]
+  },
+  {
+    "entityId": "walmart",
+    "domains": [
+      "walmart.com"
+    ]
+  },
+  {
+    "entityId": "decathlon",
+    "domains": [
+      "decathlon.com"
+    ]
+  },
+  {
+    "entityId": "inditex",
+    "domains": [
+      "inditex.com"
+    ]
+  },
+  {
+    "entityId": "gs1",
+    "domains": [
+      "gs1.org"
+    ]
+  },
+  {
+    "entityId": "rain-alliance",
+    "domains": [
+      "therainalliance.org",
+      "rainrfid.org"
+    ]
+  },
+  {
+    "entityId": "nfc-forum",
+    "domains": [
+      "nfc-forum.org"
+    ]
+  },
+  {
+    "entityId": "3gpp",
+    "domains": [
+      "3gpp.org"
+    ]
+  }
 ];
-
-/** 原文里的这些写法也算提到了对应公司。 */
-export const IDENTITY_CONTEXT_ALIASES: ReadonlyArray<{ entityId: string; pattern: RegExp }> = [
-  { entityId: "meta", pattern: /@AIatMeta\b/i },
-  { entityId: "zhipu", pattern: /\bZhipu(?:\s+AI\b|['’]s\b)/i },
-];
+export const IDENTITY_CONTEXT_ALIASES: ReadonlyArray<{ entityId: string; pattern: RegExp }> = [];

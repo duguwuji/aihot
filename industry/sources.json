@@ -1,292 +1,436 @@
 {
-  "$comment": "示范信源：首次启动时导入（scripts/seed.ts），已存在的不会被覆盖。之后在后台“信源”里增删改。字段说明见 docs/customize.md。",
+  "$comment": "RFID 首批信源：官网和原始公告优先，媒体补充；默认仅摘要与链接。已存在信源不被 seed 覆盖。GS1、Walmart、3GPP 暂停，详情见 docs/rfid.md。",
   "sources": [
     {
-      "id": "rss-openai-news",
-      "name": "OpenAI News",
-      "kind": "rss",
+      "id": "web-impinj-news",
+      "name": "Impinj 新闻与公告",
+      "kind": "web_list",
       "config": {
-        "feedUrl": "https://openai.com/news/rss.xml",
+        "url": "https://www.impinj.com/about-us/news-room/2026",
+        "itemSelector": "a.newslist__item",
+        "allowUrlPrefixes": [
+          "https://www.impinj.com/about-us/news-room/2026/"
+        ],
+        "denyUrlPrefixes": [],
+        "detail": {
+          "maxFetches": 8,
+          "titleSelector": "h1",
+          "titleAuthoritative": false,
+          "publishedAtUtcOffset": "+00:00"
+        },
         "_aihot": {
           "initialBackfillLimit": 8
-        }
+        },
+        "titleSelector": "h5",
+        "publishedAtSelector": ".newslist__item__date",
+        "publishedAtUtcOffset": "+00:00"
       },
       "tier": "T1",
       "first_party": true,
-      "owner_entity_id": "openai",
+      "owner_entity_id": "impinj",
       "participation_mode": "editorial",
       "interval_minutes": 120,
       "tags": [
         "官方"
       ],
       "site_fulltext": false,
-      "syndicate_fulltext": false
+      "syndicate_fulltext": false,
+      "enabled": true
     },
     {
-      "id": "rss-google-deepmind",
-      "name": "Google DeepMind",
-      "kind": "rss",
+      "id": "web-impinj-blog",
+      "name": "Impinj 技术博客",
+      "kind": "web_list",
       "config": {
-        "feedUrl": "https://deepmind.google/blog/rss.xml",
+        "url": "https://www.impinj.com/library/blog",
+        "itemSelector": "a[href]",
+        "allowUrlPrefixes": [
+          "https://www.impinj.com/library/blog/"
+        ],
+        "denyUrlPrefixes": [],
+        "detail": {
+          "maxFetches": 8,
+          "titleSelector": "h1",
+          "titleAuthoritative": false,
+          "publishedAtUtcOffset": "+00:00"
+        },
         "_aihot": {
           "initialBackfillLimit": 8
         }
       },
       "tier": "T1",
       "first_party": true,
-      "owner_entity_id": "google",
+      "owner_entity_id": "impinj",
       "participation_mode": "editorial",
       "interval_minutes": 120,
       "tags": [
         "官方"
       ],
       "site_fulltext": false,
-      "syndicate_fulltext": false
+      "syndicate_fulltext": false,
+      "enabled": true
     },
     {
-      "id": "rss-google-research",
-      "name": "Google Research",
-      "kind": "rss",
+      "id": "web-avery-rfid",
+      "name": "Avery Dennison RFID 公告",
+      "kind": "web_list",
       "config": {
-        "feedUrl": "https://research.google/blog/rss/",
+        "url": "https://rfid.averydennison.com/en/home/news-insights/press-releases.html",
+        "itemSelector": ".text.parbase:has(h5)",
+        "allowUrlPrefixes": [
+          "https://rfid.averydennison.com/en/home/news-insights/press-releases/",
+          "https://rfid.averydennison.com/content/rfid/na/en/home/news-insights/press-releases/"
+        ],
+        "denyUrlPrefixes": [],
+        "detail": {
+          "maxFetches": 8,
+          "titleSelector": "h1",
+          "titleAuthoritative": false,
+          "publishedAtUtcOffset": "+00:00"
+        },
         "_aihot": {
           "initialBackfillLimit": 8
-        }
+        },
+        "titleSelector": "h5",
+        "linkSelector": ".cta a",
+        "itemUrlPrefixRewrite": {
+          "from": "https://rfid.averydennison.com/content/rfid/na/",
+          "to": "https://rfid.averydennison.com/"
+        },
+        "publishedAtRegex": "(?:—|&mdash;)\\s*([A-Za-z]+\\s+\\d{1,2},\\s+\\d{4})",
+        "publishedAtUtcOffset": "+00:00"
       },
       "tier": "T1",
       "first_party": true,
-      "owner_entity_id": "google",
-      "participation_mode": "editorial",
-      "interval_minutes": 120,
-      "tags": [
-        "官方",
-        "研究"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-hugging-face",
-      "name": "Hugging Face Blog",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://huggingface.co/blog/feed.xml",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T1",
-      "first_party": true,
-      "owner_entity_id": "hugging-face",
-      "participation_mode": "editorial",
-      "interval_minutes": 120,
-      "tags": [
-        "官方",
-        "开源"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-microsoft-research",
-      "name": "Microsoft Research",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://www.microsoft.com/en-us/research/feed/",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T1",
-      "first_party": true,
-      "owner_entity_id": "microsoft",
-      "participation_mode": "editorial",
-      "interval_minutes": 120,
-      "tags": [
-        "官方",
-        "研究"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-nvidia-blog",
-      "name": "NVIDIA Blog",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://blogs.nvidia.com/feed/",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T1",
-      "first_party": true,
-      "owner_entity_id": "nvidia",
+      "owner_entity_id": "avery-dennison",
       "participation_mode": "editorial",
       "interval_minutes": 120,
       "tags": [
         "官方"
       ],
       "site_fulltext": false,
-      "syndicate_fulltext": false
+      "syndicate_fulltext": false,
+      "enabled": true
     },
     {
-      "id": "rss-aws-ml",
-      "name": "AWS Machine Learning Blog",
-      "kind": "rss",
+      "id": "web-wiliot-blog",
+      "name": "Wiliot 博客与公告",
+      "kind": "web_list",
       "config": {
-        "feedUrl": "https://aws.amazon.com/blogs/machine-learning/feed/",
+        "url": "https://www.wiliot.com/blog",
+        "itemSelector": ".blog-card-wrapper2",
+        "allowUrlPrefixes": [
+          "https://www.wiliot.com/blog/"
+        ],
+        "denyUrlPrefixes": [],
+        "detail": {
+          "maxFetches": 8,
+          "titleSelector": "h1",
+          "titleAuthoritative": false,
+          "publishedAtUtcOffset": "+00:00"
+        },
         "_aihot": {
           "initialBackfillLimit": 8
-        }
+        },
+        "linkSelector": "a.blog-card",
+        "titleSelector": "h3",
+        "publishedAtSelector": ".news-card-date",
+        "publishedAtUtcOffset": "+00:00"
       },
       "tier": "T1",
       "first_party": true,
-      "owner_entity_id": null,
-      "participation_mode": "editorial",
-      "interval_minutes": 120,
-      "tags": [
-        "官方",
-        "教程"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-github-ai",
-      "name": "GitHub Blog · AI & ML",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://github.blog/ai-and-ml/feed/",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T1",
-      "first_party": true,
-      "owner_entity_id": null,
+      "owner_entity_id": "wiliot",
       "participation_mode": "editorial",
       "interval_minutes": 120,
       "tags": [
         "官方"
       ],
       "site_fulltext": false,
-      "syndicate_fulltext": false
+      "syndicate_fulltext": false,
+      "enabled": true
     },
     {
-      "id": "rss-mistral",
-      "name": "Mistral AI",
-      "kind": "rss",
+      "id": "web-tageos-news",
+      "name": "Tageos 新闻",
+      "kind": "web_list",
       "config": {
-        "feedUrl": "https://mistral.ai/rss.xml",
+        "url": "https://www.tageos.com/en/news.html",
+        "itemSelector": ".textteaser-icon-textwrapper",
+        "allowUrlPrefixes": [
+          "https://www.tageos.com/en/why-tageos/news/news-details/"
+        ],
+        "denyUrlPrefixes": [],
+        "detail": {
+          "maxFetches": 8,
+          "titleSelector": ".mod_newsreader h2",
+          "titleAuthoritative": false,
+          "publishedAtUtcOffset": "+00:00"
+        },
         "_aihot": {
           "initialBackfillLimit": 8
-        }
+        },
+        "linkSelector": ".textteaser-icon-text a",
+        "titleSelector": "h3",
+        "publishedAtUtcOffset": "+00:00",
+        "publishedAtRegex": "<time[^>]*>([^<]+)</time>"
       },
       "tier": "T1",
       "first_party": true,
-      "owner_entity_id": null,
+      "owner_entity_id": "tageos",
       "participation_mode": "editorial",
       "interval_minutes": 120,
       "tags": [
         "官方"
       ],
       "site_fulltext": false,
-      "syndicate_fulltext": false
+      "syndicate_fulltext": false,
+      "enabled": true
     },
     {
-      "id": "rss-bair",
-      "name": "Berkeley AI Research",
-      "kind": "rss",
+      "id": "web-voyantic-blog",
+      "name": "Voyantic 测试与技术博客",
+      "kind": "web_list",
       "config": {
-        "feedUrl": "https://bair.berkeley.edu/blog/feed.xml",
+        "url": "https://voyantic.com/blog/",
+        "itemSelector": "article.posts-container-item",
+        "allowUrlPrefixes": [
+          "https://voyantic.com/blog/posts/"
+        ],
+        "denyUrlPrefixes": [
+          "https://voyantic.com/blog/posts/category/",
+          "https://voyantic.com/blog/posts/tag/",
+          "https://voyantic.com/blog/posts/author/"
+        ],
+        "detail": {
+          "maxFetches": 8,
+          "titleSelector": "h1",
+          "titleAuthoritative": false,
+          "publishedAtUtcOffset": "+00:00"
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        },
+        "linkSelector": "h3 a",
+        "titleSelector": "h3",
+        "publishedAtSelector": "time"
+      },
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "voyantic",
+      "participation_mode": "editorial",
+      "interval_minutes": 120,
+      "tags": [
+        "官方"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "enabled": true
+    },
+    {
+      "id": "web-nxp-news",
+      "name": "NXP 官方新闻",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.nxp.com/press-releases",
+        "itemSelector": ".card1-header",
+        "allowUrlPrefixes": [
+          "https://www.nxp.com/company/about-nxp/newsroom/NW-"
+        ],
+        "denyUrlPrefixes": [],
+        "detail": {
+          "maxFetches": 8,
+          "titleSelector": "h1, .title h2",
+          "titleAuthoritative": false,
+          "publishedAtUtcOffset": "+00:00"
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        },
+        "linkSelector": "h3.card1-title a",
+        "titleSelector": "h3",
+        "publishedAtSelector": "p.metadata",
+        "publishedAtUtcOffset": "+00:00"
+      },
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "nxp",
+      "participation_mode": "editorial",
+      "interval_minutes": 120,
+      "tags": [
+        "官方"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "enabled": true
+    },
+    {
+      "id": "web-identiv-press",
+      "name": "Identiv IoT 品牌公告",
+      "kind": "web_list",
+      "config": {
+        "url": "https://identiv.com/press-releases/",
+        "itemSelector": "h2.article-title:has(a[href]), h5:has(a[href])",
+        "allowUrlPrefixes": [
+          "https://identiv.com/press-release/"
+        ],
+        "denyUrlPrefixes": [],
+        "detail": {
+          "maxFetches": 8,
+          "titleSelector": "h1",
+          "titleAuthoritative": false,
+          "publishedAtUtcOffset": "+00:00"
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        },
+        "linkSelector": "a"
+      },
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "identiv",
+      "participation_mode": "editorial",
+      "interval_minutes": 120,
+      "tags": [
+        "官方"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "enabled": true
+    },
+    {
+      "id": "web-rain-blog",
+      "name": "RAIN Alliance 博客",
+      "kind": "web_list",
+      "config": {
+        "url": "https://therainalliance.org/blog/",
+        "itemSelector": ".rain-post-card__body",
+        "allowUrlPrefixes": [
+          "https://therainalliance.org/"
+        ],
+        "denyUrlPrefixes": [
+          "https://therainalliance.org/category/",
+          "https://therainalliance.org/tag/",
+          "https://therainalliance.org/page/"
+        ],
+        "detail": {
+          "maxFetches": 8,
+          "titleSelector": "h1",
+          "titleAuthoritative": false,
+          "publishedAtUtcOffset": "+00:00"
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        },
+        "linkSelector": "h3 a",
+        "titleSelector": "h3",
+        "publishedAtSelector": "time"
+      },
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "rain-alliance",
+      "participation_mode": "editorial",
+      "interval_minutes": 120,
+      "tags": [
+        "官方"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "enabled": true
+    },
+    {
+      "id": "web-rain-member-news",
+      "name": "RAIN Alliance 会员新闻",
+      "kind": "web_list",
+      "config": {
+        "url": "https://therainalliance.org/member-news/",
+        "itemSelector": ".rain-postgrid__item",
+        "allowUrlPrefixes": [
+          "https://therainalliance.org/"
+        ],
+        "denyUrlPrefixes": [
+          "https://therainalliance.org/category/",
+          "https://therainalliance.org/tag/",
+          "https://therainalliance.org/page/"
+        ],
+        "detail": {
+          "maxFetches": 8,
+          "titleSelector": "h1",
+          "titleAuthoritative": false,
+          "publishedAtUtcOffset": "+00:00"
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        },
+        "linkSelector": "a.rain-postgrid__card",
+        "titleSelector": ".rain-postgrid__title",
+        "publishedAtSelector": "time"
+      },
+      "tier": "T1_5",
+      "first_party": false,
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 120,
+      "tags": [
+        "会员新闻"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "enabled": true
+    },
+    {
+      "id": "web-gs1-news",
+      "name": "GS1 官方文章（待验证访问）",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.gs1.org/",
+        "itemSelector": "a[href]",
+        "allowUrlPrefixes": [
+          "https://www.gs1.org/resources/articles/"
+        ],
+        "denyUrlPrefixes": [],
+        "detail": {
+          "maxFetches": 8,
+          "titleSelector": "h1",
+          "titleAuthoritative": false,
+          "publishedAtUtcOffset": "+00:00"
+        },
         "_aihot": {
           "initialBackfillLimit": 8
         }
       },
       "tier": "T1",
       "first_party": true,
-      "owner_entity_id": null,
+      "owner_entity_id": "gs1",
       "participation_mode": "editorial",
-      "interval_minutes": 180,
+      "interval_minutes": 120,
       "tags": [
-        "研究"
+        "官方"
       ],
       "site_fulltext": false,
-      "syndicate_fulltext": false
+      "syndicate_fulltext": false,
+      "enabled": false
     },
     {
-      "id": "rss-the-verge-ai",
-      "name": "The Verge · AI",
-      "kind": "rss",
+      "id": "web-rfid-journal",
+      "name": "RFID Journal 新闻",
+      "kind": "web_list",
       "config": {
-        "feedUrl": "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml",
+        "url": "https://www.rfidjournal.com/news/",
+        "itemSelector": "h2:has(a[href]), h3:has(a[href])",
+        "allowUrlPrefixes": [
+          "https://www.rfidjournal.com/news/"
+        ],
+        "denyUrlPrefixes": [],
+        "detail": {
+          "maxFetches": 8,
+          "titleSelector": "h1",
+          "titleAuthoritative": false,
+          "publishedAtUtcOffset": "+00:00"
+        },
         "_aihot": {
           "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T2",
-      "first_party": false,
-      "owner_entity_id": null,
-      "participation_mode": "editorial",
-      "interval_minutes": 60,
-      "tags": [
-        "媒体"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-techcrunch-ai",
-      "name": "TechCrunch · AI",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://techcrunch.com/category/artificial-intelligence/feed/",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T2",
-      "first_party": false,
-      "owner_entity_id": null,
-      "participation_mode": "editorial",
-      "interval_minutes": 60,
-      "tags": [
-        "媒体"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-ars-technica-ai",
-      "name": "Ars Technica · AI",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://arstechnica.com/ai/feed/",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T2",
-      "first_party": false,
-      "owner_entity_id": null,
-      "participation_mode": "editorial",
-      "interval_minutes": 60,
-      "tags": [
-        "媒体"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-mit-tech-review-ai",
-      "name": "MIT Technology Review · AI",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://www.technologyreview.com/topic/artificial-intelligence/feed",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
+        },
+        "linkSelector": "a"
       },
       "tier": "T2",
       "first_party": false,
@@ -297,92 +441,145 @@
         "媒体"
       ],
       "site_fulltext": false,
-      "syndicate_fulltext": false
+      "syndicate_fulltext": false,
+      "enabled": true
     },
     {
-      "id": "rss-the-decoder",
-      "name": "The Decoder",
-      "kind": "rss",
+      "id": "web-zebra-press",
+      "name": "Zebra 官方公告",
+      "kind": "web_list",
       "config": {
-        "feedUrl": "https://the-decoder.com/feed/",
+        "url": "https://www.zebra.com/us/en/about-zebra/newsroom/press-releases.html",
+        "itemSelector": "a[href]:has(h5.result-card-title)",
+        "allowUrlPrefixes": [
+          "https://www.zebra.com/us/en/about-zebra/newsroom/press-releases/"
+        ],
+        "denyUrlPrefixes": [],
+        "detail": {
+          "maxFetches": 8,
+          "titleSelector": "h1",
+          "titleAuthoritative": false,
+          "publishedAtUtcOffset": "+00:00",
+          "publishedAtRegex": "[–—]\\s*([A-Za-z]+\\.?\\s+\\d{1,2},\\s+\\d{4})\\s*[–—]"
+        },
         "_aihot": {
           "initialBackfillLimit": 8
-        }
+        },
+        "titleSelector": "h5.result-card-title"
       },
-      "tier": "T2",
-      "first_party": false,
-      "owner_entity_id": null,
-      "participation_mode": "editorial",
-      "interval_minutes": 60,
-      "tags": [
-        "媒体"
-      ],
-      "site_fulltext": false,
-      "syndicate_fulltext": false
-    },
-    {
-      "id": "rss-simon-willison",
-      "name": "Simon Willison",
-      "kind": "rss",
-      "config": {
-        "feedUrl": "https://simonwillison.net/atom/everything/",
-        "_aihot": {
-          "initialBackfillLimit": 8
-        }
-      },
-      "tier": "T2",
-      "first_party": false,
-      "owner_entity_id": null,
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "zebra",
       "participation_mode": "editorial",
       "interval_minutes": 120,
       "tags": [
-        "个人"
+        "官方"
       ],
       "site_fulltext": false,
-      "syndicate_fulltext": false
+      "syndicate_fulltext": false,
+      "enabled": true
     },
     {
-      "id": "rss-import-ai",
-      "name": "Import AI",
-      "kind": "rss",
+      "id": "web-walmart-news",
+      "name": "Walmart 官方新闻（待接入动态列表）",
+      "kind": "web_list",
       "config": {
-        "feedUrl": "https://importai.substack.com/feed",
+        "url": "https://corporate.walmart.com/newsroom",
+        "itemSelector": "a[href]",
+        "allowUrlPrefixes": [
+          "https://corporate.walmart.com/newsroom/",
+          "https://corporate.walmart.com/content/corporate/en_us/newsroom/"
+        ],
+        "denyUrlPrefixes": [],
+        "detail": {
+          "maxFetches": 8,
+          "titleSelector": "h1",
+          "titleAuthoritative": false,
+          "publishedAtUtcOffset": "+00:00"
+        },
         "_aihot": {
           "initialBackfillLimit": 8
         }
       },
-      "tier": "T2",
-      "first_party": false,
-      "owner_entity_id": null,
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "walmart",
       "participation_mode": "editorial",
-      "interval_minutes": 180,
+      "interval_minutes": 120,
       "tags": [
-        "个人",
-        "周刊"
+        "官方"
       ],
       "site_fulltext": false,
-      "syndicate_fulltext": false
+      "syndicate_fulltext": false,
+      "enabled": false
     },
     {
-      "id": "rss-latent-space",
-      "name": "Latent Space",
-      "kind": "rss",
+      "id": "web-nfc-forum-news",
+      "name": "NFC Forum 新闻",
+      "kind": "web_list",
       "config": {
-        "feedUrl": "https://www.latent.space/feed",
+        "url": "https://nfc-forum.org/news/",
+        "itemSelector": "a[href]",
+        "allowUrlPrefixes": [
+          "https://nfc-forum.org/news/"
+        ],
+        "denyUrlPrefixes": [],
+        "detail": {
+          "maxFetches": 8,
+          "titleSelector": "h1",
+          "titleAuthoritative": false,
+          "publishedAtUtcOffset": "+00:00",
+          "publishedAtSelector": "main h6.text-gray"
+        },
+        "_aihot": {
+          "initialBackfillLimit": 8
+        },
+        "titleSelector": "h2"
+      },
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "nfc-forum",
+      "participation_mode": "editorial",
+      "interval_minutes": 120,
+      "tags": [
+        "官方"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false,
+      "enabled": true
+    },
+    {
+      "id": "web-3gpp-news",
+      "name": "3GPP 新闻（待验证访问）",
+      "kind": "web_list",
+      "config": {
+        "url": "https://www.3gpp.org/news-events/3gpp-news",
+        "itemSelector": "a[href]",
+        "allowUrlPrefixes": [
+          "https://www.3gpp.org/news-events/3gpp-news/"
+        ],
+        "denyUrlPrefixes": [],
+        "detail": {
+          "maxFetches": 8,
+          "titleSelector": "h1",
+          "titleAuthoritative": false,
+          "publishedAtUtcOffset": "+00:00"
+        },
         "_aihot": {
           "initialBackfillLimit": 8
         }
       },
-      "tier": "T2",
-      "first_party": false,
-      "owner_entity_id": null,
+      "tier": "T1",
+      "first_party": true,
+      "owner_entity_id": "3gpp",
       "participation_mode": "editorial",
-      "interval_minutes": 180,
+      "interval_minutes": 120,
       "tags": [
-        "个人"
+        "官方"
       ],
       "site_fulltext": false,
-      "syndicate_fulltext": false
+      "syndicate_fulltext": false,
+      "enabled": false
     }
   ]
 }
