@@ -21,7 +21,10 @@ test("RFID directory resolves its entities, tags and supported source configs", 
       else assert.ok(tags.has(tag), `${topic.slug}: ${tag}`);
     }
   }
-  for (const s of sources) assertSupportedConfig(s.kind, s.config);
+  for (const s of sources) {
+    assertSupportedConfig(s.kind, s.config);
+    assert.equal(s.interval_minutes, 360, `${s.id}: six-hour collection interval`);
+  }
 });
 
 test("Avery cards retain the headline and date rather than Read more", () => {

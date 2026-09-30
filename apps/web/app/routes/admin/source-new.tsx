@@ -1,3 +1,4 @@
+import { COLLECTION_INTERVAL_MINUTES } from "@rfidhot/industry/collection";
 import { SITE } from "@rfidhot/industry/site";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
@@ -27,7 +28,7 @@ interface Preview {
 export default function NewSource() {
   const navigate = useNavigate();
   const { run, pending } = useAdminAction();
-  const [form, setForm] = useState({ id: "", name: "", kind: "rss", tier: "T2", participation_mode: "editorial", interval_minutes: 30, first_party: false, site_fulltext: true, syndicate_fulltext: false, tags: "" });
+  const [form, setForm] = useState({ id: "", name: "", kind: "rss", tier: "T2", participation_mode: "editorial", interval_minutes: COLLECTION_INTERVAL_MINUTES, first_party: false, site_fulltext: true, syndicate_fulltext: false, tags: "" });
   const [config, setConfig] = useState(JSON.stringify(TEMPLATES.rss, null, 2));
   const [error, setError] = useState<string | null>(null);
   const [preview, setPreview] = useState<Preview | null>(null);

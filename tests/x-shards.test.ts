@@ -104,7 +104,7 @@ test("one search reads a shard; each account gets its own posts, run and waterma
     SELECT DISTINCT ON (source_id) source_id, status, found_count, detail FROM fetch_runs WHERE source_id IN ${sql(IDS)} ORDER BY source_id, id DESC`;
   assert.deepEqual(runs.map((r) => [r.status, r.found_count, r.detail.accounts]), [["ok", 3, 3], ["ok", 1, 3], ["ok", 0, 3]]);
   const [next] = await sql<{ minutes: number; interval: number }[]>`SELECT round(extract(epoch FROM next_fetch_at - now()) / 60)::int AS minutes, interval_minutes AS interval FROM sources WHERE id = ${IDS[2]!}`;
-  assert.deepEqual([next!.minutes, next!.interval], [30, 30], "editorial shards are read every half hour");
+  assert.deepEqual([next!.minutes, next!.interval], [360, 360], "shards are read every six hours");
 });
 
 test("a page failing after the first keeps what was read and goes on from there next run", async () => {
