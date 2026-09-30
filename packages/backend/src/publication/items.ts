@@ -94,8 +94,7 @@ export function channelCondition(channel: ChannelKey | null | undefined) {
 
 export function categoryCondition(category: CategoryKey | null | undefined, v1 = false) {
   if (!category) return sql``;
-  // v1 and RSS publish opinion as tip.
-  if (v1 && category === "tip") return sql`AND p.category IN ('tip', 'opinion')`;
+  // All public exits use the industry pack's category keys without legacy AI aliases.
   return sql`AND p.category = ${category}`;
 }
 
