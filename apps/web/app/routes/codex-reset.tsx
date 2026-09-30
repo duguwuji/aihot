@@ -1,7 +1,7 @@
-import { SITE, withSubject } from "@aihot/industry/site";
+import { SITE, withSubject } from "@rfidhot/industry/site";
 import { useEffect, useState } from "react";
 import { useLoaderData, useRevalidator } from "react-router";
-import type { CodexResetEvent, CodexResetSitePage, CodexResetDay } from "@aihot/contracts/monitor";
+import type { CodexResetEvent, CodexResetSitePage, CodexResetDay } from "@rfidhot/contracts/monitor";
 import { loadOr404 } from "../lib/api.server";
 import { pageMeta } from "../lib/seo";
 import { PostCard } from "../features/monitor/PostCard";

@@ -1,10 +1,10 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { Link, useLoaderData, useNavigate, useSearchParams } from "react-router";
 import type { Route } from "./+types/agent";
-import { SITE, withSubject } from "@aihot/industry/site";
-import { FEATURES } from "@aihot/industry/features";
-import { CATEGORY_KEYS } from "@aihot/contracts/taxonomy";
-import { MCP_TOOL_NAMES as T } from "@aihot/contracts/mcp";
+import { SITE, withSubject } from "@rfidhot/industry/site";
+import { FEATURES } from "@rfidhot/industry/features";
+import { CATEGORY_KEYS } from "@rfidhot/contracts/taxonomy";
+import { MCP_TOOL_NAMES as T } from "@rfidhot/contracts/mcp";
 import { listPath, pageMeta, siteUrl } from "../lib/seo";
 import { CodeBlock, CopyButton } from "../components/CodeBlock";
 import { IconArrowUpRight, IconChevronRight } from "../components/icons";

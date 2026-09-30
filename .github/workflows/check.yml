@@ -47,7 +47,7 @@ jobs:
       - name: Typecheck
         run: npm run typecheck
       - name: Build web
-        run: npm run build -w @aihot/web
+        run: npm run build -w @rfidhot/web
       - name: Web tests
         run: node --test apps/web/tests/*.test.ts
 

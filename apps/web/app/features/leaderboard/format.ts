@@ -1,5 +1,5 @@
-import type { LbPrice } from "@aihot/contracts/leaderboard";
-import { beijingDate, beijingTime } from "@aihot/contracts/time";
+import type { LbPrice } from "@rfidhot/contracts/leaderboard";
+import { beijingDate, beijingTime } from "@rfidhot/contracts/time";
 
 /** ≥ ¥0.1 → up to two decimals; smaller amounts keep three significant digits. */
 export function yuan(v: number | null | undefined): string {

@@ -7,10 +7,10 @@ import { existsSync, mkdtempSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { after, test } from "node:test";
-import { config } from "@aihot/backend/config";
-import { closeDb, sql } from "@aihot/backend/db";
-import { forwardFeedbackToFeishu } from "@aihot/backend/notify/feishu";
-import { forwardPendingFeedback, submitFeedback } from "@aihot/backend/operations/feedback";
+import { config } from "@rfidhot/backend/config";
+import { closeDb, sql } from "@rfidhot/backend/db";
+import { forwardFeedbackToFeishu } from "@rfidhot/backend/notify/feishu";
+import { forwardPendingFeedback, submitFeedback } from "@rfidhot/backend/operations/feedback";
 
 const T = tag();
 config.dataDir = mkdtempSync(path.join(tmpdir(), "aihot-feedback-"));

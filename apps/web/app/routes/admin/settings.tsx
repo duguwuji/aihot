@@ -1,4 +1,4 @@
-import { SITE } from "@aihot/industry/site";
+import { SITE } from "@rfidhot/industry/site";
 import { useRef, useState } from "react";
 import type { Route } from "./+types/settings";
 import { adminGet } from "../../lib/admin.server";

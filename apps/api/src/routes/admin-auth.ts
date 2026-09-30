@@ -1,6 +1,6 @@
 // Admin sign-in and the /api/admin guard. Public routes never read the session.
 import type { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
-import { config } from "@aihot/backend/config";
+import { config } from "@rfidhot/backend/config";
 import {
   completeLogin,
   cookie,
@@ -16,7 +16,7 @@ import {
   sessionPrincipal,
   STATE_COOKIE,
   type AdminPrincipal,
-} from "@aihot/backend/admin/auth";
+} from "@rfidhot/backend/admin/auth";
 import { sendProblem } from "../http/respond.ts";
 
 /** Cookies are Secure whenever the site is served over HTTPS. */

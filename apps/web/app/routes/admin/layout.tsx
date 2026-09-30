@@ -1,5 +1,5 @@
-import { FEATURES } from "@aihot/industry/features";
-import { SITE } from "@aihot/industry/site";
+import { FEATURES } from "@rfidhot/industry/features";
+import { SITE } from "@rfidhot/industry/site";
 import { motion } from "motion/react";
 import { NavLink, Outlet, useLocation, useNavigation, type ShouldRevalidateFunction } from "react-router";
 import type { Route } from "./+types/layout";

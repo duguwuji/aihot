@@ -1,7 +1,7 @@
 // Reading-group expansions: the reports behind "另有 N 家信源报道" and the developments behind
 // "展开 N 条进展". Members must pass the same visibility, pool eligibility and parent-page filters.
-import type { CategoryKey, ChannelKey } from "@aihot/contracts/taxonomy";
-import type { DevelopmentsResponse, GroupReportsResponse } from "@aihot/contracts/site";
+import type { CategoryKey, ChannelKey } from "@rfidhot/contracts/taxonomy";
+import type { DevelopmentsResponse, GroupReportsResponse } from "@rfidhot/contracts/site";
 import { sql } from "../db.ts";
 import { decodeCursor, encodeCursor, InvalidCursorError, queryBinding } from "../lib/cursor.ts";
 import { shortHash } from "../lib/ids.ts";

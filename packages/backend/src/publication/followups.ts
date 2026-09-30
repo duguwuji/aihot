@@ -1,4 +1,4 @@
-import type { StoryFollowupsResponse } from "@aihot/contracts/site";
+import type { StoryFollowupsResponse } from "@rfidhot/contracts/site";
 import { loadDevelopments } from "./groups.ts";
 
 /** A short reading-page list, using the same publication/filter rules as the full event. */

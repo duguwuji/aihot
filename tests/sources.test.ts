@@ -7,13 +7,13 @@ import "./setup.ts";
 import assert from "node:assert/strict";
 import http from "node:http";
 import { after, test } from "node:test";
-import { config } from "@aihot/backend/config";
-import { sanitizeBody, trimTrailingChrome } from "@aihot/backend/content/sanitize";
-import { fetchDetail, fetchWebList, fromHtml, fromMarkdown } from "@aihot/backend/sources/web-list";
-import { fetchRss } from "@aihot/backend/sources/rss";
-import { fetchJsonList } from "@aihot/backend/sources/json-list";
-import { noiseFiltered } from "@aihot/backend/sources/collect";
-import { unsupportedConfig } from "@aihot/backend/sources/config-keys";
+import { config } from "@rfidhot/backend/config";
+import { sanitizeBody, trimTrailingChrome } from "@rfidhot/backend/content/sanitize";
+import { fetchDetail, fetchWebList, fromHtml, fromMarkdown } from "@rfidhot/backend/sources/web-list";
+import { fetchRss } from "@rfidhot/backend/sources/rss";
+import { fetchJsonList } from "@rfidhot/backend/sources/json-list";
+import { noiseFiltered } from "@rfidhot/backend/sources/collect";
+import { unsupportedConfig } from "@rfidhot/backend/sources/config-keys";
 
 const source = (config: Record<string, unknown>) => ({ id: "test-list", config }) as never;
 

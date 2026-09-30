@@ -3,7 +3,7 @@
 // ledger → grouping → deliveries. Visibility changes and manual corrections go through editorial
 // overrides with a version check, are re-projected to every public exit, and are audited.
 import { z } from "zod";
-import { ARTICLE_ID_PATTERN, CATEGORY_KEYS } from "@aihot/contracts/taxonomy";
+import { ARTICLE_ID_PATTERN, CATEGORY_KEYS } from "@rfidhot/contracts/taxonomy";
 import { sql } from "../db.ts";
 import { enqueue, QUEUES } from "../jobs/queue.ts";
 import { queueProcessing } from "../jobs/content.ts";

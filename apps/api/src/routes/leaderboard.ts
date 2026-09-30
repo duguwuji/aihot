@@ -1,7 +1,7 @@
 // First-party leaderboard endpoints (/api/site/leaderboard*). Read-only views of the latest published run.
 import type { FastifyInstance } from "fastify";
-import { LEADERBOARD_PUBLIC_BOARDS, type LeaderboardBoardKey } from "@aihot/contracts/taxonomy";
-import { loadBoard, loadModel, loadRulesData, loadSource, loadSources, NoLeaderboardRun } from "@aihot/backend/leaderboard/read";
+import { LEADERBOARD_PUBLIC_BOARDS, type LeaderboardBoardKey } from "@rfidhot/contracts/taxonomy";
+import { loadBoard, loadModel, loadRulesData, loadSource, loadSources, NoLeaderboardRun } from "@rfidhot/backend/leaderboard/read";
 import { sendJsonWithEtag, sendProblem } from "../http/respond.ts";
 import { siteHandler } from "./site.ts";
 

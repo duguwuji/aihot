@@ -1,13 +1,13 @@
 {
-  "name": "@aihot/backend",
+  "name": "@rfidhot/backend",
   "private": true,
   "type": "module",
   "exports": {
     "./*": "./src/*.ts"
   },
   "dependencies": {
-    "@aihot/contracts": "*",
-    "@aihot/industry": "*",
+    "@rfidhot/contracts": "*",
+    "@rfidhot/industry": "*",
     "@mozilla/readability": "0.6.0",
     "@paralleldrive/cuid2": "3.3.0",
     "cheerio": "1.2.0",

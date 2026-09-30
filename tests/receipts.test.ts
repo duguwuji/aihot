@@ -5,12 +5,12 @@ import { stub, tag } from "./setup.ts";
 import assert from "node:assert/strict";
 import { after, before, test } from "node:test";
 import { z } from "zod";
-import { config } from "@aihot/backend/config";
-import { closeDb, sql } from "@aihot/backend/db";
-import { chatJson, ModelOutputError } from "@aihot/backend/providers/llm";
-import { embeddingsAvailable } from "@aihot/backend/providers/embeddings";
-import { BudgetExceededError, paidRequest, ReceiptUnknownError } from "@aihot/backend/providers/receipts";
-import { autoReleaseUnknownReceipts } from "@aihot/backend/admin/runs";
+import { config } from "@rfidhot/backend/config";
+import { closeDb, sql } from "@rfidhot/backend/db";
+import { chatJson, ModelOutputError } from "@rfidhot/backend/providers/llm";
+import { embeddingsAvailable } from "@rfidhot/backend/providers/embeddings";
+import { BudgetExceededError, paidRequest, ReceiptUnknownError } from "@rfidhot/backend/providers/receipts";
+import { autoReleaseUnknownReceipts } from "@rfidhot/backend/admin/runs";
 
 const usage = { prompt_tokens: 80, completion_tokens: 20, total_tokens: 100 };
 let answer: (hit: number) => string = () => '{"ok":true}';

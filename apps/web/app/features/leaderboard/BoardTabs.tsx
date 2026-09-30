@@ -1,5 +1,5 @@
 import { useLocation } from "react-router";
-import { LEADERBOARD_BOARD_LABELS, LEADERBOARD_PUBLIC_BOARDS } from "@aihot/contracts/taxonomy";
+import { LEADERBOARD_BOARD_LABELS, LEADERBOARD_PUBLIC_BOARDS } from "@rfidhot/contracts/taxonomy";
 import { PillTabs } from "../../components/ui/Tabs";
 import { boardHref } from "./format";
 

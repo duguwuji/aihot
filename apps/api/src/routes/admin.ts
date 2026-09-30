@@ -2,19 +2,19 @@
 // Every route goes through adminHandler (session + CSRF); manual changes are audited in the modules.
 import { readFile } from "node:fs/promises";
 import type { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
-import { actorOf } from "@aihot/backend/admin/auth";
+import { actorOf } from "@rfidhot/backend/admin/auth";
 
-import { importSelectBenchRun, listSelectBenchRuns, selectBenchRun } from "@aihot/backend/admin/selectbench";
-import { modelsOverview, switchModel } from "@aihot/backend/admin/models";
+import { importSelectBenchRun, listSelectBenchRuns, selectBenchRun } from "@rfidhot/backend/admin/selectbench";
+import { modelsOverview, switchModel } from "@rfidhot/backend/admin/models";
 
-import { contentChain, detachFromFact, mergeStories, overrideFields, rerun, searchContent, setSeoIndexed, setVisibility } from "@aihot/backend/admin/content";
-import { banSource, eraseFeedback, feedbackScreenshot, listFeedback, unbanSource, updateFeedback } from "@aihot/backend/admin/feedback";
-import { listMonitorEvents, listMonitorPosts, relinkPost, resolveMonitorPost, reviewReceipt, setWithdrawn, updateMonitorEvent } from "@aihot/backend/admin/monitor";
-import { releaseReceipt, requeueFailedArticles, resolveDelivery, runsOverview } from "@aihot/backend/admin/runs";
-import { listBudgets, listTargets, replaceContactQr, setTargetEnabled, updateBudget } from "@aihot/backend/admin/settings";
-import { createSource, fetchNow, listSources, previewSource, sourceDetail, updateSource } from "@aihot/backend/admin/sources";
-import { sql } from "@aihot/backend/db";
-import { loadContact } from "@aihot/backend/site/contact";
+import { contentChain, detachFromFact, mergeStories, overrideFields, rerun, searchContent, setSeoIndexed, setVisibility } from "@rfidhot/backend/admin/content";
+import { banSource, eraseFeedback, feedbackScreenshot, listFeedback, unbanSource, updateFeedback } from "@rfidhot/backend/admin/feedback";
+import { listMonitorEvents, listMonitorPosts, relinkPost, resolveMonitorPost, reviewReceipt, setWithdrawn, updateMonitorEvent } from "@rfidhot/backend/admin/monitor";
+import { releaseReceipt, requeueFailedArticles, resolveDelivery, runsOverview } from "@rfidhot/backend/admin/runs";
+import { listBudgets, listTargets, replaceContactQr, setTargetEnabled, updateBudget } from "@rfidhot/backend/admin/settings";
+import { createSource, fetchNow, listSources, previewSource, sourceDetail, updateSource } from "@rfidhot/backend/admin/sources";
+import { sql } from "@rfidhot/backend/db";
+import { loadContact } from "@rfidhot/backend/site/contact";
 import { sendProblem } from "../http/respond.ts";
 import { adminHandler } from "./admin-auth.ts";
 

@@ -1,7 +1,7 @@
 // Page metadata from one place: title template, canonical address, OG images, robots. The site's name
 // and wording come from the industry pack (industry/site.ts); its address from SITE_URL.
 import type { MetaDescriptor } from "react-router";
-import { SITE } from "@aihot/industry/site";
+import { SITE } from "@rfidhot/industry/site";
 
 /**
  * The site's address: SITE_URL while rendering on the server (what crawlers and share previews read),

@@ -9,7 +9,7 @@ import { deliverContent } from "../notify/deliver.ts";
 import { applyRecognition } from "./assemble.ts";
 import { recognizePost, type ContextInput, type OpenEventInput } from "./recognize.ts";
 import { bjIso, codexResetsSnapshot, MONITOR_PAGE_URL } from "./read.ts";
-import { SITE } from "@aihot/industry/site";
+import { SITE } from "@rfidhot/industry/site";
 
 export const AUTHOR = "thsottiaux";
 const NORMAL_EVERY_MS = 5 * 60_000;

@@ -5,8 +5,8 @@ import path from "node:path";
 import { createHash, randomUUID } from "node:crypto";
 import satori from "satori";
 import sharp from "sharp";
-import { SITE } from "@aihot/industry/site";
-import { config, REPO_ROOT } from "@aihot/backend/config";
+import { SITE } from "@rfidhot/industry/site";
+import { config, REPO_ROOT } from "@rfidhot/backend/config";
 
 export const OG_TEMPLATE_VERSION = "og-2026-09-29.1";
 const WIDTH = 1200;

@@ -3,10 +3,10 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { test } from "node:test";
-import { fromHtml } from "@aihot/backend/sources/web-list";
-import { assertSupportedConfig } from "@aihot/backend/sources/config-keys";
-import type { SourceRow } from "@aihot/backend/sources/types";
-import { ENTITIES, CATEGORY_TAGS, TOPIC_TAGS, ENTITY_TAGS } from "@aihot/industry/taxonomy";
+import { fromHtml } from "@rfidhot/backend/sources/web-list";
+import { assertSupportedConfig } from "@rfidhot/backend/sources/config-keys";
+import type { SourceRow } from "@rfidhot/backend/sources/types";
+import { ENTITIES, CATEGORY_TAGS, TOPIC_TAGS, ENTITY_TAGS } from "@rfidhot/industry/taxonomy";
 
 const sources = JSON.parse(readFileSync(new URL("../industry/sources.json", import.meta.url), "utf8")).sources as SourceRow[];
 const source = (id: string) => sources.find((s) => s.id === id)!;

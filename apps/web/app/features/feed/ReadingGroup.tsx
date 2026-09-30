@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Link, useLocation } from "react-router";
 import { Collapse } from "../../components/ui/Presence";
-import type { Development, GroupInfo, GroupReport, TimelineFilters } from "@aihot/contracts/site";
+import type { Development, GroupInfo, GroupReport, TimelineFilters } from "@rfidhot/contracts/site";
 import { IconArrowUpRight, IconChevronDown } from "../../components/icons";
 import { monthDayTime, shortSourceName } from "../../lib/format";
 import { isReload } from "./restore";

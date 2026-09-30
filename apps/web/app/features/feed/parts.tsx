@@ -1,6 +1,6 @@
 // Small building blocks shared by feed items, detail pages and lists.
 import { useState } from "react";
-import type { FeedItemSummary, MediaView } from "@aihot/contracts/site";
+import type { FeedItemSummary, MediaView } from "@rfidhot/contracts/site";
 import { IconBookmark } from "../../components/icons";
 import { SourceAvatar } from "../../components/ui/SourceAvatar";
 import { Lightbox } from "../../components/ui/Lightbox";

@@ -1,7 +1,7 @@
 import { useEffect, useId, useState, type CSSProperties, type SyntheticEvent } from "react";
 import { createPortal } from "react-dom";
-import type { LbConfidence, LbStability } from "@aihot/contracts/leaderboard";
-import { LB_CONFIDENCE_LABELS } from "@aihot/contracts/leaderboard";
+import type { LbConfidence, LbStability } from "@rfidhot/contracts/leaderboard";
+import { LB_CONFIDENCE_LABELS } from "@rfidhot/contracts/leaderboard";
 
 const DOT: Record<LbConfidence, string> = {
   HIGH: "bg-ok",

@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState, type KeyboardEvent } from "react";
-import type { CodexCalendarMark, CodexResetEvent, CodexResetDay } from "@aihot/contracts/monitor";
-import { addDays } from "@aihot/contracts/time";
+import type { CodexCalendarMark, CodexResetEvent, CodexResetDay } from "@rfidhot/contracts/monitor";
+import { addDays } from "@rfidhot/contracts/time";
 import { IconChevronRight } from "../../components/icons";
 import { PostCard } from "./PostCard";
 import { bjDate, dayWord, durationText, monthDay, stamp, windowText } from "./format";

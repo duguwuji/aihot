@@ -1,4 +1,4 @@
-import { SITE } from "@aihot/industry/site";
+import { SITE } from "@rfidhot/industry/site";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 import { Presence } from "../components/ui/Presence";

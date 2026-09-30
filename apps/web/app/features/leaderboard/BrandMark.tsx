@@ -1,4 +1,4 @@
-import type { LbBrand } from "@aihot/contracts/leaderboard";
+import type { LbBrand } from "@rfidhot/contracts/leaderboard";
 
 // Marks drawn in white for a dark tile (Kimi's K) sit on their own dark plate.
 const DARK_TILE = new Set(["/model-providers/moonshot.svg"]);

@@ -3,11 +3,11 @@ import { gate, stub, tag } from "./setup.ts";
 import { after, before, test } from "node:test";
 import assert from "node:assert/strict";
 import { setTimeout as delay } from "node:timers/promises";
-import { closeDb, sql } from "@aihot/backend/db";
-import { upsertMaterial } from "@aihot/backend/content/materials";
-import { stopBoss } from "@aihot/backend/jobs/queue";
-import { publishArticle, publishArticleTx } from "@aihot/backend/publication/publish";
-import { candidates, composeDaily } from "@aihot/backend/reports/compose";
+import { closeDb, sql } from "@rfidhot/backend/db";
+import { upsertMaterial } from "@rfidhot/backend/content/materials";
+import { stopBoss } from "@rfidhot/backend/jobs/queue";
+import { publishArticle, publishArticleTx } from "@rfidhot/backend/publication/publish";
+import { candidates, composeDaily } from "@rfidhot/backend/reports/compose";
 
 const T = tag();
 const SOURCE = `test-report-boundary-${T}`;

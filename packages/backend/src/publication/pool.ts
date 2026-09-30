@@ -1,6 +1,6 @@
 // Public pool (/all) with numeric pages, and search in its two orderings.
-import type { PoolResponse, TimelineFilters } from "@aihot/contracts/site";
-import { beijingDate, beijingMidnight } from "@aihot/contracts/time";
+import type { PoolResponse, TimelineFilters } from "@rfidhot/contracts/site";
+import { beijingDate, beijingMidnight } from "@rfidhot/contracts/time";
 import { one, sql, withCustomPlans, type Db } from "../db.ts";
 import {
   categoryCondition, channelCondition, ITEM_COLUMNS, ITEM_FROM, listedCondition, tagCondition, toFeedItemSummary, topicCondition,

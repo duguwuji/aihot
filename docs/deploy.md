@@ -5,7 +5,7 @@
 需要一台装了 Docker（带 Compose）的机器。云服务器建议至少 2 核、4 GB 内存，构建镜像时要用到。
 
 ```bash
-git clone https://github.com/duguwuji/aihot.git rfidhot
+git clone https://github.com/duguwuji/rfidhot.git rfidhot
 cd rfidhot
 node scripts/init-env.ts --llm-key <你的模型 API Key>
 # 先在 .env 将 COLLECT_ENABLED 和 MODEL_CALLS_ENABLED 设为 false
@@ -53,12 +53,24 @@ docker compose up -d --build
 
 数据库迁移只做向后兼容的增量，更新时自动执行。
 
+### 从旧仓库名更新
+
+仓库已改名为 `duguwuji/rfidhot`。已有本地检出先更新远端地址：
+
+```bash
+git remote set-url origin https://github.com/duguwuji/rfidhot.git
+```
+
+npm 工作区已从 `@aihot/*` 改为 `@rfidhot/*`；更新后运行 `npm ci`，同步修改自行编写的工作区命令。Docker 镜像名为 `rfidhot-app`。
+
+为使已有部署继续读取原有数据，Compose 项目名仍为 `aihot`，数据库用户和库名、数据卷、`AIHOT_*` 环境变量、后台 Cookie、浏览器存储键及公开 API 的兼容字段保留原名。此次改名无需迁移数据库或浏览器数据。部署地址仍由 `SITE_URL` 配置，不随 GitHub 仓库名改变。
+
 ### 备份
 
 在 `.env` 里配置 `DB_BACKUP_STORE_*`（任何 S3 兼容的对象存储），每天 04:10 自动备份到那里。也可以手动导出：
 
 ```bash
-docker compose exec -T db pg_dump -U aihot aihot | gzip > myhot-$(date +%F).sql.gz
+docker compose exec -T db pg_dump -U aihot aihot | gzip > rfidhot-$(date +%F).sql.gz
 ```
 
 数据都在三个 Docker 卷里：`db`（数据库）、`data`（上传的图片、图片缓存、本地备份）、`caddy`（证书）。`docker compose down` 不会删除它们；`docker compose down -v` 会。
@@ -99,7 +111,7 @@ API_BASE_URL=http://127.0.0.1:3001
 ```bash
 node --env-file=.env scripts/migrate.ts
 node --env-file=.env scripts/seed.ts
-npm run build -w @aihot/web
+npm run build -w @rfidhot/web
 
 node --env-file=.env apps/api/src/main.ts          # 接口，3001 端口
 node --env-file=.env apps/worker/src/main.ts       # 后台任务

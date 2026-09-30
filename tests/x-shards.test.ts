@@ -4,11 +4,11 @@
 import { Reply, stub, tag } from "./setup.ts";
 import assert from "node:assert/strict";
 import { after, before, test } from "node:test";
-import { config } from "@aihot/backend/config";
-import { closeDb, sql } from "@aihot/backend/db";
-import { stopBoss } from "@aihot/backend/jobs/queue";
-import { collectXShard, scheduleDueSources } from "@aihot/backend/sources/collect";
-import { planXShards, shardQuery } from "@aihot/backend/sources/x";
+import { config } from "@rfidhot/backend/config";
+import { closeDb, sql } from "@rfidhot/backend/db";
+import { stopBoss } from "@rfidhot/backend/jobs/queue";
+import { collectXShard, scheduleDueSources } from "@rfidhot/backend/sources/collect";
+import { planXShards, shardQuery } from "@rfidhot/backend/sources/x";
 
 const T = tag();
 const HANDLES = [`sa${T}`, `sb${T}`, `sc${T}`];

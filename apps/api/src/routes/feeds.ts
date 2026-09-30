@@ -1,7 +1,7 @@
 // RSS routes. Unknown query parameters are accepted and never change content.
 import type { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
-import { RSS_CACHE_CONTROL } from "@aihot/contracts/http-policy";
-import { dailyFeed, isFeedCategory, itemFeed, type ItemFeedKind } from "@aihot/backend/publication/feeds";
+import { RSS_CACHE_CONTROL } from "@rfidhot/contracts/http-policy";
+import { dailyFeed, isFeedCategory, itemFeed, type ItemFeedKind } from "@rfidhot/backend/publication/feeds";
 import { applyPublicHeaders, sendTextWithEtag } from "../http/respond.ts";
 
 async function sendFeed(req: FastifyRequest, reply: FastifyReply, xml: string) {

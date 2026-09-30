@@ -1,7 +1,7 @@
 import { Link, useLoaderData } from "react-router";
 import { apiGet } from "../lib/api.server";
 import { pageMeta } from "../lib/seo";
-import { SITE } from "@aihot/industry/site";
+import { SITE } from "@rfidhot/industry/site";
 
 interface TopicSummary {
   slug: string;

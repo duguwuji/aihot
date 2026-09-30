@@ -2,7 +2,7 @@
 // (全部动态, topics, search results, 收藏).
 import { useMemo } from "react";
 import { Link } from "react-router";
-import type { FeedItemSummary } from "@aihot/contracts/site";
+import type { FeedItemSummary } from "@rfidhot/contracts/site";
 import { IconChevronRight } from "../../components/icons";
 import { beijingDate } from "../../lib/format";
 import { markRead, useReadSet } from "../../lib/local-state";

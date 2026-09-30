@@ -1,5 +1,5 @@
 // Reading the latest published hot ranking. The web shows heat values; machine exits only ranks.
-import type { HotParticipant, HotStripEntry } from "@aihot/contracts/site";
+import type { HotParticipant, HotStripEntry } from "@rfidhot/contracts/site";
 import { sql } from "../db.ts";
 import { proxiedImage, proxiedImageSet } from "../media/imgproxy.ts";
 

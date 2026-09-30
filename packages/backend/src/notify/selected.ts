@@ -4,9 +4,9 @@
 import { sql } from "../db.ts";
 import { sha256 } from "../lib/ids.ts";
 import { itemUrl } from "../publication/links.ts";
-import { CATEGORY_LABELS, type CategoryKey } from "@aihot/contracts/taxonomy";
+import { CATEGORY_LABELS, type CategoryKey } from "@rfidhot/contracts/taxonomy";
 import { deliverContent } from "./deliver.ts";
-import { SITE } from "@aihot/industry/site";
+import { SITE } from "@rfidhot/industry/site";
 
 const MAX_AGE_MS = 12 * 3600_000;
 const LEASE_MS = 10 * 60_000;

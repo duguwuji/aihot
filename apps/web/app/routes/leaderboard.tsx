@@ -1,7 +1,7 @@
-import { SITE, withSubject } from "@aihot/industry/site";
+import { SITE, withSubject } from "@rfidhot/industry/site";
 import { Link, data, useLoaderData } from "react-router";
 import type { Route } from "./+types/leaderboard";
-import type { LbBoardResponse } from "@aihot/contracts/leaderboard";
+import type { LbBoardResponse } from "@rfidhot/contracts/leaderboard";
 import { loadOr404 } from "../lib/api.server";
 import { breadcrumbLd, pageMeta, siteUrl, titled } from "../lib/seo";
 import { BoardTable } from "../features/leaderboard/BoardTable";

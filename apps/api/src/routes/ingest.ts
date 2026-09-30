@@ -2,8 +2,8 @@
 // token (never an admin session) and their own rate limit.
 import { timingSafeEqual } from "node:crypto";
 import type { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
-import { credential } from "@aihot/backend/config";
-import { IngestError, ingestItems } from "@aihot/backend/ingest/items";
+import { credential } from "@rfidhot/backend/config";
+import { IngestError, ingestItems } from "@rfidhot/backend/ingest/items";
 
 
 const PLACEHOLDER = /^(|changeme|change-me|placeholder|xxx+|todo|test|dev|your[-_]?token.*)$/i;

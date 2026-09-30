@@ -1,8 +1,8 @@
 // Codex reset monitor read layer: the v1 codex-resets snapshot and the /codex-reset page read the
 // same events. Announcement, in-progress, confirmation and "should have landed" stay distinct;
 // passing an announced time never turns into a confirmation.
-import { addDays, beijingDate, beijingMidnight } from "@aihot/contracts/time";
-import type { CodexCalendarMark, CodexResetMonitor, CodexResetPageData, CodexResetsSnapshot } from "@aihot/contracts/monitor";
+import { addDays, beijingDate, beijingMidnight } from "@rfidhot/contracts/time";
+import type { CodexCalendarMark, CodexResetMonitor, CodexResetPageData, CodexResetsSnapshot } from "@rfidhot/contracts/monitor";
 import { sql } from "../db.ts";
 import { sha256, stableJson } from "../lib/ids.ts";
 import { proxiedImage } from "../media/imgproxy.ts";

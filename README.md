@@ -2,6 +2,8 @@
 
 面向 RFID 行业研究的中文热点站。追踪 RAIN RFID、HF/NFC、Ambient IoT、商品身份、库存数据与智能包装，优先读取厂商和标准组织的原始材料，补充行业媒体报道。
 
+代码仓库：[duguwuji/rfidhot](https://github.com/duguwuji/rfidhot)。npm 工作区使用 `@rfidhot/*`。
+
 ## 当前配置
 
 - 五类栏目：技术产品、应用部署、企业动态、标准法规、研究方法。
@@ -25,7 +27,7 @@ npm ci
 npm run typecheck
 DATABASE_URL=postgres://…/rfidhot_test node scripts/migrate.ts
 DATABASE_URL=postgres://…/rfidhot_test npm test
-npm run build -w @aihot/web
+npm run build -w @rfidhot/web
 node --test apps/web/tests/*.test.ts
 node scripts/smoke.ts --base http://localhost:3000
 ```

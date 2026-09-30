@@ -1,7 +1,7 @@
 // Moving between reports: the archive column on desktop, a tab row and recent-issue chips on phones.
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
-import type { ReportNavigationEntry, ReportKind } from "@aihot/contracts/site";
+import type { ReportNavigationEntry, ReportKind } from "@rfidhot/contracts/site";
 import { PillTabs } from "../../components/ui/Tabs";
 import { IconChevronRight } from "../../components/icons";
 import { KINDS, KIND_LABEL, KIND_PATH, archiveGroups, archiveMark, chipLabel, reportPath } from "./format";

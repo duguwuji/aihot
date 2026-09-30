@@ -1,5 +1,5 @@
 // Item detail and Markdown export, both behind the same visibility and licence rules.
-import type { ItemDetail, SiteItemDetail, OutlineEntry, StoryRef } from "@aihot/contracts/site";
+import type { ItemDetail, SiteItemDetail, OutlineEntry, StoryRef } from "@rfidhot/contracts/site";
 import TurndownService from "turndown";
 import { sql } from "../db.ts";
 import { proxyBodyImages } from "../media/imgproxy.ts";
@@ -7,7 +7,7 @@ import { textToHtml } from "../content/sanitize.ts";
 import { ITEM_COLUMNS, ITEM_FROM, selectedCondition, toItemSummary, xView, type ItemRow } from "./items.ts";
 import { itemUrl } from "./links.ts";
 import { hasItemPage } from "./rules.ts";
-import { SITE } from "@aihot/industry/site";
+import { SITE } from "@rfidhot/industry/site";
 
 interface DetailRow extends ItemRow {
   body_html: string | null;
@@ -176,7 +176,7 @@ export async function exportMarkdown(id: string): Promise<{ filename: string; bo
     if (!isZh && row.tr_html && row.tr_complete) lines.push("## 正文 · 中文译文", "", turndown.turndown(row.tr_html), "");
     lines.push(isZh ? "## 正文" : "## 正文 · 原文", "", turndown.turndown(row.body_html), "");
   }
-  return { filename: `aihot-${row.id}.md`, body: lines.join("\n").replace(/\n{3,}/g, "\n\n") };
+  return { filename: `rfidhot-${row.id}.md`, body: lines.join("\n").replace(/\n{3,}/g, "\n\n") };
 }
 
 /** Site reading projection: default text remains SSR, a second language has its own readable URL. */

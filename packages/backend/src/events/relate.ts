@@ -9,7 +9,7 @@
 // relation with both reports fully described is what makes the judge usable: a yes/no question with
 // "prefer no" refused half of the true merges (measured 2026-09-28 on 370 labelled pairs).
 import { z } from "zod";
-import { beijingDate, beijingTime } from "@aihot/contracts/time";
+import { beijingDate, beijingTime } from "@rfidhot/contracts/time";
 import { promptText, promptVersion } from "../editorial/prompts.ts";
 
 export const RELATE_PROMPT_VERSION = promptVersion("group-batch", "group-pair", "group-signal");

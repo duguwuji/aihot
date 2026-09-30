@@ -1,6 +1,6 @@
 // Site navigation, one place for the desktop sidebar, the mobile tab bar and the mobile "更多" page.
-import { withSubject } from "@aihot/industry/site";
-import { FEATURES } from "@aihot/industry/features";
+import { withSubject } from "@rfidhot/industry/site";
+import { FEATURES } from "@rfidhot/industry/features";
 import type { ReactNode } from "react";
 import {
   IconApps, IconBolt, IconBookmark, IconChart, IconDoc, IconFlame, IconGrid, IconHeart, IconHistory, IconList, IconMessage, IconPlug,

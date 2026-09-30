@@ -1,10 +1,10 @@
-import { SITE, withSubject } from "@aihot/industry/site";
+import { SITE, withSubject } from "@rfidhot/industry/site";
 import { useEffect, useState, type ReactNode } from "react";
 import { Link, useLoaderData, useSearchParams } from "react-router";
 import { Collapse } from "../components/ui/Presence";
 import type { Route } from "./+types/leaderboard-model";
-import type { LbComparison, LbEvidenceItem, LbModelDetail } from "@aihot/contracts/leaderboard";
-import { LEADERBOARD_BOARD_LABELS, LEADERBOARD_PUBLIC_BOARDS } from "@aihot/contracts/taxonomy";
+import type { LbComparison, LbEvidenceItem, LbModelDetail } from "@rfidhot/contracts/leaderboard";
+import { LEADERBOARD_BOARD_LABELS, LEADERBOARD_PUBLIC_BOARDS } from "@rfidhot/contracts/taxonomy";
 import { loadOr404 } from "../lib/api.server";
 import { breadcrumbLd, pageMeta, siteUrl, titled } from "../lib/seo";
 import { BrandMark } from "../features/leaderboard/BrandMark";

@@ -6,8 +6,8 @@ import { createHash, randomUUID } from "node:crypto";
 import satori from "satori";
 import sharp from "sharp";
 import { renderSVG } from "uqr";
-import { SITE } from "@aihot/industry/site";
-import { config } from "@aihot/backend/config";
+import { SITE } from "@rfidhot/industry/site";
+import { config } from "@rfidhot/backend/config";
 import { fonts, h, nameMark, OG_PNG, SITE_HOST, type Node } from "./render.ts";
 
 export const POSTER_TEMPLATE_VERSION = "poster-2026-09-29.1";

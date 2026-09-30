@@ -2,11 +2,11 @@
 // missed schedule points are caught up; regeneration creates a revision. The editors' prompts are in
 // the industry pack (industry/prompts/report-*.md), the sections follow its categories.
 import { z } from "zod";
-import { SITE } from "@aihot/industry/site";
-import { CATEGORIES } from "@aihot/industry/taxonomy";
+import { SITE } from "@rfidhot/industry/site";
+import { CATEGORIES } from "@rfidhot/industry/taxonomy";
 import { promptText, promptVersion } from "../editorial/prompts.ts";
 import { modelFor } from "../editorial/models.ts";
-import { addDays, beijingDate, beijingMidnight, isoWeekLabel, isoWeekRange } from "@aihot/contracts/time";
+import { addDays, beijingDate, beijingMidnight, isoWeekLabel, isoWeekRange } from "@rfidhot/contracts/time";
 import { sql } from "../db.ts";
 import { chatJson } from "../providers/llm.ts";
 import { completeReceipt } from "../providers/receipts.ts";

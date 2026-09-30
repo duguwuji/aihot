@@ -1,8 +1,8 @@
 // Public method statement for the leaderboard (method v15, docs/leaderboard.md).
 // The copy states how rankings are actually computed; it changes only together with the method.
-import { SITE, withSubject } from "@aihot/industry/site";
+import { SITE, withSubject } from "@rfidhot/industry/site";
 import { Link, useLoaderData } from "react-router";
-import type { LbRunInfo } from "@aihot/contracts/leaderboard";
+import type { LbRunInfo } from "@rfidhot/contracts/leaderboard";
 import { loadOr404 } from "../lib/api.server";
 import { breadcrumbLd, pageMeta } from "../lib/seo";
 import { pct } from "../features/leaderboard/format";

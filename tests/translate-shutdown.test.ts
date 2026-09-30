@@ -2,10 +2,10 @@ import { gate, stub, tag } from './setup.ts';
 import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
 import { after, before, test } from 'node:test';
-import { sql, closeDb } from '@aihot/backend/db';
-import { stopBoss } from '@aihot/backend/jobs/queue';
-import { upsertMaterial } from '@aihot/backend/content/materials';
-import { publishArticle } from '@aihot/backend/publication/publish';
+import { sql, closeDb } from '@rfidhot/backend/db';
+import { stopBoss } from '@rfidhot/backend/jobs/queue';
+import { upsertMaterial } from '@rfidhot/backend/content/materials';
+import { publishArticle } from '@rfidhot/backend/publication/publish';
 
 const T = tag();
 const SOURCE = `test-translate-stop-${T}`;
@@ -20,9 +20,9 @@ const provider = await stub(async (_hit, req) => {
 
 function runTranslation() {
   const script = `
-    import { translatePending } from '@aihot/backend/editorial/translate';
-    import { shutdownSignal } from '@aihot/backend/jobs/queue';
-    import { closeDb } from '@aihot/backend/db';
+    import { translatePending } from '@rfidhot/backend/editorial/translate';
+    import { shutdownSignal } from '@rfidhot/backend/jobs/queue';
+    import { closeDb } from '@rfidhot/backend/db';
     process.on('SIGTERM', () => { shutdownSignal.abort(); process.send({ stopped: true }); });
     try { process.send({ result: await translatePending({ limit: 1 }) }); }
     finally { await closeDb(); process.disconnect(); }

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Collapse } from "../../components/ui/Presence";
-import type { CodexResetContextPost } from "@aihot/contracts/monitor";
+import type { CodexResetContextPost } from "@rfidhot/contracts/monitor";
 import { IconArrowUpRight, IconChevronRight } from "../../components/icons";
 import { SourceAvatar } from "../../components/ui/SourceAvatar";
 import { stamp } from "./format";
