@@ -4,8 +4,8 @@ import { mkdtemp, readFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { after, test } from "node:test";
-import { config } from "@aihot/backend/config";
-import { closeDb, sql } from "@aihot/backend/db";
+import { config } from "@rfidhot/backend/config";
+import { closeDb, sql } from "@rfidhot/backend/db";
 import { buildApp } from "../apps/api/src/app.ts";
 
 process.env.FEISHU_INTERNAL_ENABLED = "false";

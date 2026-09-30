@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { computeBoardsInWorker } from "@aihot/backend/leaderboard/method/compute";
-import { computeBoard, type BoardInput } from "@aihot/backend/leaderboard/method/v15";
+import { computeBoardsInWorker } from "@rfidhot/backend/leaderboard/method/compute";
+import { computeBoard, type BoardInput } from "@rfidhot/backend/leaderboard/method/v15";
 
 test("threaded v15 preserves complete board output and lets the parent event loop run", async () => {
   const models = ["a", "b", "c", "d", "e"];

@@ -2,7 +2,7 @@
 // stated explicitly. v1 `digest` and `latest` read the same stored version.
 import { z } from "zod";
 import { modelFor } from "../editorial/models.ts";
-import { beijingDate, beijingTime } from "@aihot/contracts/time";
+import { beijingDate, beijingTime } from "@rfidhot/contracts/time";
 import { sql } from "../db.ts";
 import { chatJson } from "../providers/llm.ts";
 import { completeReceipt } from "../providers/receipts.ts";

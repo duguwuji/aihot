@@ -1,10 +1,10 @@
 // The report nameplates (industry/brand/nameplates/, made by scripts/nameplates.ts from the pack's
 // subject word). Each logotype is cached on its own; the two paths take the theme's ink and accent.
-import daily from "@aihot/industry/brand/nameplates/daily.svg?url&no-inline";
-import weekly from "@aihot/industry/brand/nameplates/weekly.svg?url&no-inline";
-import monthly from "@aihot/industry/brand/nameplates/monthly.svg?url&no-inline";
-import archive from "@aihot/industry/brand/nameplates/archive.svg?url&no-inline";
-import viewBoxes from "@aihot/industry/brand/nameplates/index.json";
+import daily from "@rfidhot/industry/brand/nameplates/daily.svg?url&no-inline";
+import weekly from "@rfidhot/industry/brand/nameplates/weekly.svg?url&no-inline";
+import monthly from "@rfidhot/industry/brand/nameplates/monthly.svg?url&no-inline";
+import archive from "@rfidhot/industry/brand/nameplates/archive.svg?url&no-inline";
+import viewBoxes from "@rfidhot/industry/brand/nameplates/index.json";
 
 const NAMEPLATES = {
   daily: { url: daily, viewBox: viewBoxes.daily },

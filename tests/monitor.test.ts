@@ -3,9 +3,9 @@
 import "./setup.ts";
 import assert from "node:assert/strict";
 import { after, test } from "node:test";
-import { closeDb, sql } from "@aihot/backend/db";
-import { applyRecognition } from "@aihot/backend/monitor/assemble";
-import type { Proposition, Recognition } from "@aihot/backend/monitor/recognize";
+import { closeDb, sql } from "@rfidhot/backend/db";
+import { applyRecognition } from "@rfidhot/backend/monitor/assemble";
+import type { Proposition, Recognition } from "@rfidhot/backend/monitor/recognize";
 
 after(async () => {
   await closeDb();

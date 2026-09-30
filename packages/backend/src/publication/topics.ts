@@ -1,4 +1,4 @@
-import type { FeedItemSummary } from "@aihot/contracts/site";
+import type { FeedItemSummary } from "@rfidhot/contracts/site";
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { REPO_ROOT } from "../config.ts";

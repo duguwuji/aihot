@@ -1,9 +1,9 @@
 import { useCallback, useMemo, useRef, useState, type ReactNode } from "react";
 import { Link, useLoaderData } from "react-router";
-import type { SiteStats } from "@aihot/contracts/site";
+import type { SiteStats } from "@rfidhot/contracts/site";
 import { apiGet } from "../lib/api.server";
 import { shortSourceName } from "../lib/format";
-import { ABOUT, SITE, withSubject } from "@aihot/industry/site";
+import { ABOUT, SITE, withSubject } from "@rfidhot/industry/site";
 import { organizationLd, pageMeta } from "../lib/seo";
 import { Kicker } from "../components/ui/Kicker";
 import { buttonClass } from "../components/ui/Controls";

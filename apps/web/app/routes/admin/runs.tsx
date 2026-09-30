@@ -1,4 +1,4 @@
-import { SITE } from "@aihot/industry/site";
+import { SITE } from "@rfidhot/industry/site";
 import { useState } from "react";
 import { Link, useFetcher } from "react-router";
 import { useEffect } from "react";

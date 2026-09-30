@@ -1,7 +1,7 @@
-import { SITE, withSubject } from "@aihot/industry/site";
+import { SITE, withSubject } from "@rfidhot/industry/site";
 import { useLoaderData } from "react-router";
 import type { Route } from "./+types/report-latest";
-import type { ReportDetail, ReportNavigationEntry } from "@aihot/contracts/site";
+import type { ReportDetail, ReportNavigationEntry } from "@rfidhot/contracts/site";
 import { loadOr404 } from "../lib/api.server";
 import { pageMeta } from "../lib/seo";
 import { beijingDate } from "../lib/format";

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
-import type { StoryFollowup, StoryFollowupsResponse, StoryRef } from "@aihot/contracts/site";
+import type { StoryFollowup, StoryFollowupsResponse, StoryRef } from "@rfidhot/contracts/site";
 import { MoreLink } from "../../components/ui/Page";
 import { relativeTime, shortSourceName } from "../../lib/format";
 

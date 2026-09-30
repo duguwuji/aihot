@@ -9,10 +9,10 @@
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import path from "node:path";
 import { parseArgs } from "node:util";
-import { REPO_ROOT } from "@aihot/backend/config";
-import { closeDb, sql } from "@aihot/backend/db";
-import { ANALYZE_PROMPT_VERSION, normalizeAnalysis, runAnalysis, type AnalyzeInputArticle } from "@aihot/backend/editorial/analyze";
-import { importSelectBenchRun } from "@aihot/backend/admin/selectbench";
+import { REPO_ROOT } from "@rfidhot/backend/config";
+import { closeDb, sql } from "@rfidhot/backend/db";
+import { ANALYZE_PROMPT_VERSION, normalizeAnalysis, runAnalysis, type AnalyzeInputArticle } from "@rfidhot/backend/editorial/analyze";
+import { importSelectBenchRun } from "@rfidhot/backend/admin/selectbench";
 
 const { values } = parseArgs({
   options: {

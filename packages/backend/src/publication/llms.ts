@@ -1,10 +1,10 @@
 // /llms.txt — generated from the site's own configuration; only real, available resources are listed.
-import { SITE, withSubject } from "@aihot/industry/site";
-import { FEATURES } from "@aihot/industry/features";
-import { CATEGORY_KEYS } from "@aihot/contracts/taxonomy";
+import { SITE, withSubject } from "@rfidhot/industry/site";
+import { FEATURES } from "@rfidhot/industry/features";
+import { CATEGORY_KEYS } from "@rfidhot/contracts/taxonomy";
 import { siteUrl } from "./links.ts";
 import { sql } from "../db.ts";
-import { MCP_TOOLS } from "@aihot/contracts/mcp";
+import { MCP_TOOLS } from "@rfidhot/contracts/mcp";
 
 /** Discovery only needs to know whether an entry exists, not count its entire history. */
 export async function loadLlmsAvailability() {

@@ -1,4 +1,4 @@
-import type { CodexResetPageData, CodexResetSitePage, CodexResetDay } from "@aihot/contracts/monitor";
+import type { CodexResetPageData, CodexResetSitePage, CodexResetDay } from "@rfidhot/contracts/monitor";
 import { codexResetPage } from "../monitor/read.ts";
 
 export function siteCodexResetPage(page: CodexResetPageData, date?: string): CodexResetSitePage {

@@ -4,11 +4,11 @@
 import { gate, stub, tag } from "./setup.ts";
 import assert from "node:assert/strict";
 import { after, before, test } from "node:test";
-import { closeDb, sql } from "@aihot/backend/db";
-import { upsertMaterial } from "@aihot/backend/content/materials";
-import { translatePending } from "@aihot/backend/editorial/translate";
-import { stopBoss } from "@aihot/backend/jobs/queue";
-import { publishArticle } from "@aihot/backend/publication/publish";
+import { closeDb, sql } from "@rfidhot/backend/db";
+import { upsertMaterial } from "@rfidhot/backend/content/materials";
+import { translatePending } from "@rfidhot/backend/editorial/translate";
+import { stopBoss } from "@rfidhot/backend/jobs/queue";
+import { publishArticle } from "@rfidhot/backend/publication/publish";
 import { buildApp } from "../apps/api/src/app.ts";
 
 const T = tag();

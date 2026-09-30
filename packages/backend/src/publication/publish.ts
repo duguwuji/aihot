@@ -1,8 +1,8 @@
 // Publishing: derive the public projection of one article from its material, the latest judgement,
 // manual overrides and grouping, then record selected-set changes in the sync ledger.
 // Rebuilding only re-reads stored results; it never calls a model.
-import { SITE } from "@aihot/industry/site";
-import { toPublicApiCategory } from "@aihot/contracts/taxonomy";
+import { SITE } from "@rfidhot/industry/site";
+import { toPublicApiCategory } from "@rfidhot/contracts/taxonomy";
 import { config } from "../config.ts";
 import { one, sql, type Tx } from "../db.ts";
 import { sha256, stableJson } from "../lib/ids.ts";

@@ -1,7 +1,7 @@
 // Shared HTTP helpers: Problem JSON, public API headers, ETag / 304, strict query parsing.
 import { createHash, randomUUID } from "node:crypto";
 import type { FastifyReply, FastifyRequest } from "fastify";
-import { NO_STORE, PUBLIC_API_CORS } from "@aihot/contracts/http-policy";
+import { NO_STORE, PUBLIC_API_CORS } from "@rfidhot/contracts/http-policy";
 
 declare module "fastify" {
   interface FastifyRequest {

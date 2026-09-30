@@ -1,8 +1,8 @@
-import { FEATURES } from "@aihot/industry/features";
+import { FEATURES } from "@rfidhot/industry/features";
 import Fastify, { type FastifyInstance } from "fastify";
 import { randomUUID } from "node:crypto";
-import { OAUTH_PROBE_PATHS, resolveRedirect } from "@aihot/contracts/http-policy";
-import { sql } from "@aihot/backend/db";
+import { OAUTH_PROBE_PATHS, resolveRedirect } from "@rfidhot/contracts/http-policy";
+import { sql } from "@rfidhot/backend/db";
 import { registerSite } from "./routes/site.ts";
 import { registerLeaderboard } from "./routes/leaderboard.ts";
 import { registerOg } from "./routes/og.ts";

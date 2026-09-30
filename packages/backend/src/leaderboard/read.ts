@@ -1,7 +1,7 @@
 // Leaderboard read layer: every leaderboard page reads the latest published run through here.
 // Page reads never compute rankings; they only format what the run stored.
-import { SITE } from "@aihot/industry/site";
-import { LEADERBOARD_PUBLIC_BOARDS, type LeaderboardBoardKey } from "@aihot/contracts/taxonomy";
+import { SITE } from "@rfidhot/industry/site";
+import { LEADERBOARD_PUBLIC_BOARDS, type LeaderboardBoardKey } from "@rfidhot/contracts/taxonomy";
 import type {
   LbBoardEntry,
   LbBoardResponse,
@@ -18,7 +18,7 @@ import type {
   LbSourcesResponse,
   LbSourceSummary,
   LbStability,
-} from "@aihot/contracts/leaderboard";
+} from "@rfidhot/contracts/leaderboard";
 import { sql } from "../db.ts";
 import {
   BOARD_COPY,

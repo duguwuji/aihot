@@ -2,8 +2,8 @@
 // one card per story, per fact outside a story, or per standalone article. A card sits at its latest
 // development's first appearance, so a new development brings it back up while a representative swap
 // never moves it; the representative is the first-party pick of the story's initiating fact.
-import type { GroupInfo, TimelineCard, TimelineFilters, TimelineResponse } from "@aihot/contracts/site";
-import { beijingDate } from "@aihot/contracts/time";
+import type { GroupInfo, TimelineCard, TimelineFilters, TimelineResponse } from "@rfidhot/contracts/site";
+import { beijingDate } from "@rfidhot/contracts/time";
 import { sql } from "../db.ts";
 import { decodeCursor, encodeCursor, InvalidCursorError, queryBinding } from "../lib/cursor.ts";
 import {

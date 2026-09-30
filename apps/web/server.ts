@@ -6,7 +6,7 @@ import { stat } from "node:fs/promises";
 import { createServer, request as httpRequest } from "node:http";
 import path from "node:path";
 import { createRequestListener } from "@react-router/node";
-import { isApiOwned, resolveRedirect } from "@aihot/contracts/http-policy";
+import { isApiOwned, resolveRedirect } from "@rfidhot/contracts/http-policy";
 
 const PORT = Number(process.env.WEB_PORT || process.env.PORT || 3000);
 const HOST = process.env.WEB_HOST || "127.0.0.1";

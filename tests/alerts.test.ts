@@ -4,10 +4,10 @@
 import { tag } from "./setup.ts";
 import assert from "node:assert/strict";
 import { after, before, test } from "node:test";
-import { closeDb, sql } from "@aihot/backend/db";
-import { getBoss, stopBoss } from "@aihot/backend/jobs/queue";
-import { upsertMaterial } from "@aihot/backend/content/materials";
-import { checkAlerts } from "@aihot/backend/operations/alerts";
+import { closeDb, sql } from "@rfidhot/backend/db";
+import { getBoss, stopBoss } from "@rfidhot/backend/jobs/queue";
+import { upsertMaterial } from "@rfidhot/backend/content/materials";
+import { checkAlerts } from "@rfidhot/backend/operations/alerts";
 
 const T = tag();
 const SOURCE = `test-alerts-${T}`;

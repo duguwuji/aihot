@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import type { ReportNavigationEntry, ReportKind } from "@aihot/contracts/site";
+import type { ReportNavigationEntry, ReportKind } from "@rfidhot/contracts/site";
 import { ReportArchive, ReportPhoneNav } from "./ReportNav";
 
 /**

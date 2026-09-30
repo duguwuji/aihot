@@ -1,7 +1,7 @@
 import { useLayoutEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { Link } from "react-router";
-import type { LbBoardEntry } from "@aihot/contracts/leaderboard";
-import { LB_CONFIDENCE_LABELS } from "@aihot/contracts/leaderboard";
+import type { LbBoardEntry } from "@rfidhot/contracts/leaderboard";
+import { LB_CONFIDENCE_LABELS } from "@rfidhot/contracts/leaderboard";
 import { BrandMark } from "./BrandMark";
 import { EvidenceBadge } from "./Evidence";
 import { modelHref, yuan } from "./format";

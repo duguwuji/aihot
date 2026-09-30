@@ -1,6 +1,6 @@
-import { SITE, withSubject } from "@aihot/industry/site";
+import { SITE, withSubject } from "@rfidhot/industry/site";
 import { Link, useLoaderData } from "react-router";
-import type { LbSourcesResponse } from "@aihot/contracts/leaderboard";
+import type { LbSourcesResponse } from "@rfidhot/contracts/leaderboard";
 import { loadOr404 } from "../lib/api.server";
 import { breadcrumbLd, pageMeta } from "../lib/seo";
 import { BrandMark } from "../features/leaderboard/BrandMark";

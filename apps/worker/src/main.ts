@@ -1,16 +1,16 @@
 // Worker process: queues and schedules for collection, processing, events, reports, monitors and ops.
-import { assertProductionSecrets } from "@aihot/backend/config";
-import { FEATURES } from "@aihot/industry/features";
-import { closeDb, sql } from "@aihot/backend/db";
-import { getBoss, stopBoss } from "@aihot/backend/jobs/queue";
-import { registerContentJobs } from "@aihot/backend/jobs/content";
-import { registerSourceJobs } from "@aihot/backend/jobs/sources";
-import { registerEventJobs } from "@aihot/backend/jobs/events";
-import { registerNotifyJobs } from "@aihot/backend/jobs/notify";
-import { registerPublicationJobs } from "@aihot/backend/jobs/publication";
+import { assertProductionSecrets } from "@rfidhot/backend/config";
+import { FEATURES } from "@rfidhot/industry/features";
+import { closeDb, sql } from "@rfidhot/backend/db";
+import { getBoss, stopBoss } from "@rfidhot/backend/jobs/queue";
+import { registerContentJobs } from "@rfidhot/backend/jobs/content";
+import { registerSourceJobs } from "@rfidhot/backend/jobs/sources";
+import { registerEventJobs } from "@rfidhot/backend/jobs/events";
+import { registerNotifyJobs } from "@rfidhot/backend/jobs/notify";
+import { registerPublicationJobs } from "@rfidhot/backend/jobs/publication";
 import { registerSchedules } from "./schedules.ts";
-import { ensureContentTargets } from "@aihot/backend/notify/deliver";
-import { startHeartbeat } from "@aihot/backend/operations/heartbeat";
+import { ensureContentTargets } from "@rfidhot/backend/notify/deliver";
+import { startHeartbeat } from "@rfidhot/backend/operations/heartbeat";
 
 assertProductionSecrets([["auth", "IMG_PROXY_SIGN_SECRET"]]);
 

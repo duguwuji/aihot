@@ -1,15 +1,15 @@
 // Public API v1 (long-term). Field shapes follow reference/public-v1.openapi.json 2.0.0 (the paths stay /api/v1).
-import { FEATURES } from "@aihot/industry/features";
+import { FEATURES } from "@rfidhot/industry/features";
 import type { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
-import { V1_CACHE_CONTROL } from "@aihot/contracts/http-policy";
-import { PUBLIC_API_CATEGORY_KEYS, type PublicApiCategoryKey } from "@aihot/contracts/taxonomy";
-import { InvalidCursorError } from "@aihot/backend/lib/cursor";
-import { SearchBusyError } from "@aihot/backend/publication/pool";
-import { selectedChanges, selectedSnapshot, SnapshotRequiredError, v1Items } from "@aihot/backend/publication/v1";
-import { resolveStory, v1HotTopics, v1Story } from "@aihot/backend/publication/stories";
-import { v1Dailies, v1Daily } from "@aihot/backend/publication/reports";
-import { codexResetsRecent, codexResetsSnapshot } from "@aihot/backend/monitor/read";
-import { isValidDate } from "@aihot/contracts/time";
+import { V1_CACHE_CONTROL } from "@rfidhot/contracts/http-policy";
+import { PUBLIC_API_CATEGORY_KEYS, type PublicApiCategoryKey } from "@rfidhot/contracts/taxonomy";
+import { InvalidCursorError } from "@rfidhot/backend/lib/cursor";
+import { SearchBusyError } from "@rfidhot/backend/publication/pool";
+import { selectedChanges, selectedSnapshot, SnapshotRequiredError, v1Items } from "@rfidhot/backend/publication/v1";
+import { resolveStory, v1HotTopics, v1Story } from "@rfidhot/backend/publication/stories";
+import { v1Dailies, v1Daily } from "@rfidhot/backend/publication/reports";
+import { codexResetsRecent, codexResetsSnapshot } from "@rfidhot/backend/monitor/read";
+import { isValidDate } from "@rfidhot/contracts/time";
 import { applyPublicHeaders, QueryError, sendJsonWithEtag, sendProblem, strictQuery } from "../http/respond.ts";
 
 type Handler = (req: FastifyRequest, reply: FastifyReply) => Promise<unknown>;

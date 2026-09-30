@@ -4,7 +4,7 @@ import { z } from "zod";
 import { modelFor } from "../editorial/models.ts";
 import { chatJson } from "../providers/llm.ts";
 import { pacificParts } from "./time.ts";
-import { SITE } from "@aihot/industry/site";
+import { SITE } from "@rfidhot/industry/site";
 
 export const RECOGNIZE_PROMPT_VERSION = "tibo-reset-2026-09-26.5";
 

@@ -1,7 +1,7 @@
 // Reader state kept only in this browser; nothing about a reader leaves it. Storage failures degrade
 // silently. Keep the keys and formats once readers have data under them.
 import { useSyncExternalStore } from "react";
-import { beijingDate } from "@aihot/contracts/time";
+import { beijingDate } from "@rfidhot/contracts/time";
 
 export const KEYS = {
   starred: "aihot-starred-items",

@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { after, test } from "node:test";
-import { beijingDate, beijingTime } from "@aihot/contracts/time";
+import { beijingDate, beijingTime } from "@rfidhot/contracts/time";
 
 const originalWindow = Object.getOwnPropertyDescriptor(globalThis, "window");
 after(() => {

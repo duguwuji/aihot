@@ -2,24 +2,24 @@
 // every exit, reports stop quoting withdrawn items, the hot board drops a withdrawn item at once, item
 // pages follow the site's rule, an early release keeps the selected ledger in order, a withdrawal
 // waiting behind an unreleased item leaves new snapshots at once, and snapshots answer conditional requests.
-import { config } from "@aihot/backend/config";
-import { CATEGORY_LABELS } from "@aihot/contracts/taxonomy";
-import { beijingDate } from "@aihot/contracts/time";
+import { config } from "@rfidhot/backend/config";
+import { CATEGORY_LABELS } from "@rfidhot/contracts/taxonomy";
+import { beijingDate } from "@rfidhot/contracts/time";
 import { ogEtag } from "../apps/api/src/og/render.ts";
 import { posterEtag } from "../apps/api/src/og/poster.ts";
 import { tag } from "./setup.ts";
 import assert from "node:assert/strict";
 import { randomUUID } from "node:crypto";
 import { after, before, test } from "node:test";
-import { closeDb, sql } from "@aihot/backend/db";
-import { setVisibility } from "@aihot/backend/admin/content";
-import { updateSource } from "@aihot/backend/admin/sources";
-import { upsertMaterial } from "@aihot/backend/content/materials";
-import { stopBoss } from "@aihot/backend/jobs/queue";
-import { publishArticle, republishSource } from "@aihot/backend/publication/publish";
-import { computeHotRanking } from "@aihot/backend/events/hot";
-import { latestHotRanking } from "@aihot/backend/events/hot-read";
-import { effectiveWatermark } from "@aihot/backend/publication/v1";
+import { closeDb, sql } from "@rfidhot/backend/db";
+import { setVisibility } from "@rfidhot/backend/admin/content";
+import { updateSource } from "@rfidhot/backend/admin/sources";
+import { upsertMaterial } from "@rfidhot/backend/content/materials";
+import { stopBoss } from "@rfidhot/backend/jobs/queue";
+import { publishArticle, republishSource } from "@rfidhot/backend/publication/publish";
+import { computeHotRanking } from "@rfidhot/backend/events/hot";
+import { latestHotRanking } from "@rfidhot/backend/events/hot-read";
+import { effectiveWatermark } from "@rfidhot/backend/publication/v1";
 import { buildApp } from "../apps/api/src/app.ts";
 
 const T = tag();

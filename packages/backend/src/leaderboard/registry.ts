@@ -1,9 +1,9 @@
 // Reader-facing leaderboard vocabulary: evaluation sources, board copy, score formats and brand marks.
 // Scoring weights and eligibility never come from here; they come from the computation run.
-import type { LeaderboardBoardKey } from "@aihot/contracts/taxonomy";
-import type { LbBrand, LbScoreFormat, LbSourceStatus } from "@aihot/contracts/leaderboard";
+import type { LeaderboardBoardKey } from "@rfidhot/contracts/taxonomy";
+import type { LbBrand, LbScoreFormat, LbSourceStatus } from "@rfidhot/contracts/leaderboard";
 import registryData from "./source-registry.json" with { type: "json" };
-import { SITE } from "@aihot/industry/site";
+import { SITE } from "@rfidhot/industry/site";
 
 export interface RegistrySource {
   key: string;

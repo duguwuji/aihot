@@ -3,9 +3,9 @@
 // details the public pages show (label, interval, sample size, source rank). Differences are either
 // upstream changes since that snapshot or parser differences.
 //   node --env-file=.env scripts/lb-fetch-check.ts [source-key ...]
-import { closeDb, sql } from "@aihot/backend/db";
-import { FETCHERS } from "@aihot/backend/leaderboard/fetch/index";
-import { resolveRows, storedConfigurationKey } from "@aihot/backend/leaderboard/fetch/store";
+import { closeDb, sql } from "@rfidhot/backend/db";
+import { FETCHERS } from "@rfidhot/backend/leaderboard/fetch/index";
+import { resolveRows, storedConfigurationKey } from "@rfidhot/backend/leaderboard/fetch/store";
 
 interface StoredRow {
   model_id: string;

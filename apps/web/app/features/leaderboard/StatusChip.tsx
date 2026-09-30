@@ -1,5 +1,5 @@
-import type { LbSourceStatus } from "@aihot/contracts/leaderboard";
-import { LB_SOURCE_STATUS_LABELS } from "@aihot/contracts/leaderboard";
+import type { LbSourceStatus } from "@rfidhot/contracts/leaderboard";
+import { LB_SOURCE_STATUS_LABELS } from "@rfidhot/contracts/leaderboard";
 
 const STATUS_TONE: Record<LbSourceStatus, string> = {
   ranked: "border-accent/30 text-accent",

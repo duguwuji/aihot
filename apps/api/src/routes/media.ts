@@ -1,7 +1,7 @@
 // Signed image proxy. Unsigned, badly signed or expired requests are 403 without any upstream fetch.
 import type { FastifyInstance } from "fastify";
-import { produceImage } from "@aihot/backend/media/images";
-import { verifyProxyRequest } from "@aihot/backend/media/imgproxy";
+import { produceImage } from "@rfidhot/backend/media/images";
+import { verifyProxyRequest } from "@rfidhot/backend/media/imgproxy";
 import { looseQuery } from "../http/respond.ts";
 
 export function registerMedia(app: FastifyInstance) {

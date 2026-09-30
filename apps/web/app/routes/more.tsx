@@ -1,5 +1,5 @@
-import { SITE } from "@aihot/industry/site";
-import { FEATURES } from "@aihot/industry/features";
+import { SITE } from "@rfidhot/industry/site";
+import { FEATURES } from "@rfidhot/industry/features";
 import type { ReactNode } from "react";
 import { Link, useRouteLoaderData } from "react-router";
 import type { loader as rootLoader } from "../root";

@@ -2,7 +2,7 @@
 // the latest 500 stories, leaderboard pages and indexable items. Cached ~5 minutes and rebuilt in the
 // background after that (crawlers get the previous copy meanwhile); if the database fails, the last
 // successful sitemap is served (never an empty one). Bounded.
-import { FEATURES } from "@aihot/industry/features";
+import { FEATURES } from "@rfidhot/industry/features";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { config } from "../config.ts";

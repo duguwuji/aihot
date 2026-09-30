@@ -4,8 +4,8 @@ import "./setup.ts";
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import sharp from "sharp";
-import { iconCandidates } from "@aihot/backend/sources/icons";
-import { decodeIco } from "@aihot/backend/media/images";
+import { iconCandidates } from "@rfidhot/backend/sources/icons";
+import { decodeIco } from "@rfidhot/backend/media/images";
 
 test("touch icons and large icons come before small ones and favicon.ico", () => {
   const html = `<head>

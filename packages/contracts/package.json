@@ -1,5 +1,5 @@
 {
-  "name": "@aihot/contracts",
+  "name": "@rfidhot/contracts",
   "private": true,
   "type": "module",
   "exports": {
@@ -7,6 +7,6 @@
     "./*": "./src/*.ts"
   },
   "dependencies": {
-    "@aihot/industry": "*"
+    "@rfidhot/industry": "*"
   }
 }

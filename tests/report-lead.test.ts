@@ -3,8 +3,8 @@
 import "./setup.ts";
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import type { ReportCitation } from "@aihot/contracts/site";
-import { leadItemOf } from "@aihot/backend/publication/reports";
+import type { ReportCitation } from "@rfidhot/contracts/site";
+import { leadItemOf } from "@rfidhot/backend/publication/reports";
 
 const cite = (itemId: string, title: string) => ({ itemId, title }) as ReportCitation;
 const arena = cite("a", "Claude Opus 5.5 (High) 以 1509 分登顶 Arena Text Arena 榜首");

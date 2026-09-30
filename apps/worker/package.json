@@ -1,5 +1,5 @@
 {
-  "name": "@aihot/worker",
+  "name": "@rfidhot/worker",
   "private": true,
   "type": "module",
   "scripts": {
@@ -7,8 +7,8 @@
     "start": "node src/main.ts"
   },
   "dependencies": {
-    "@aihot/backend": "*",
-    "@aihot/contracts": "*",
-    "@aihot/industry": "*"
+    "@rfidhot/backend": "*",
+    "@rfidhot/contracts": "*",
+    "@rfidhot/industry": "*"
   }
 }

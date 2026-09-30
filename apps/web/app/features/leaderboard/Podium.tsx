@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import type { LbBoardEntry } from "@aihot/contracts/leaderboard";
+import type { LbBoardEntry } from "@rfidhot/contracts/leaderboard";
 import { BrandMark } from "./BrandMark";
 import { EvidenceBadge } from "./Evidence";
 import { modelHref } from "./format";
