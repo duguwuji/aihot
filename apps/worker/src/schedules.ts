@@ -5,7 +5,7 @@ import { credential } from "@rfidhot/backend/config";
 import { ensureQueue, recordRun } from "@rfidhot/backend/jobs/queue";
 import { sweepUnprocessed } from "@rfidhot/backend/jobs/content";
 import { translatePending } from "@rfidhot/backend/editorial/translate";
-import { adaptIntervals, scheduleDueSources } from "@rfidhot/backend/sources/collect";
+import { scheduleDueSources } from "@rfidhot/backend/sources/collect";
 import { scheduleMpReconcile } from "@rfidhot/backend/sources/mp";
 import { refreshSourceIcons } from "@rfidhot/backend/sources/icons";
 import { computeHotRanking, snapshotHeat } from "@rfidhot/backend/events/hot";
@@ -81,7 +81,6 @@ export const SCHEDULES: Scheduled[] = [
   ...(collecting
     ? [
         { name: "sources.schedule", cron: "* * * * *", run: () => scheduleDueSources() },
-        { name: "sources.adapt-intervals", cron: "20 4 * * *", run: adaptIntervals },
         // WeChat official accounts (paid), each once per its interval.
         { name: "sources.mp-reconcile", cron: "*/15 * * * *", run: () => scheduleMpReconcile() },
       ]

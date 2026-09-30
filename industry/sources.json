@@ -29,7 +29,7 @@
       "first_party": true,
       "owner_entity_id": "impinj",
       "participation_mode": "editorial",
-      "interval_minutes": 120,
+      "interval_minutes": 360,
       "tags": [
         "官方"
       ],
@@ -62,7 +62,7 @@
       "first_party": true,
       "owner_entity_id": "impinj",
       "participation_mode": "editorial",
-      "interval_minutes": 120,
+      "interval_minutes": 360,
       "tags": [
         "官方"
       ],
@@ -104,7 +104,7 @@
       "first_party": true,
       "owner_entity_id": "avery-dennison",
       "participation_mode": "editorial",
-      "interval_minutes": 120,
+      "interval_minutes": 360,
       "tags": [
         "官方"
       ],
@@ -141,7 +141,7 @@
       "first_party": true,
       "owner_entity_id": "wiliot",
       "participation_mode": "editorial",
-      "interval_minutes": 120,
+      "interval_minutes": 360,
       "tags": [
         "官方"
       ],
@@ -178,7 +178,7 @@
       "first_party": true,
       "owner_entity_id": "tageos",
       "participation_mode": "editorial",
-      "interval_minutes": 120,
+      "interval_minutes": 360,
       "tags": [
         "官方"
       ],
@@ -218,7 +218,7 @@
       "first_party": true,
       "owner_entity_id": "voyantic",
       "participation_mode": "editorial",
-      "interval_minutes": 120,
+      "interval_minutes": 360,
       "tags": [
         "官方"
       ],
@@ -255,7 +255,7 @@
       "first_party": true,
       "owner_entity_id": "nxp",
       "participation_mode": "editorial",
-      "interval_minutes": 120,
+      "interval_minutes": 360,
       "tags": [
         "官方"
       ],
@@ -289,7 +289,7 @@
       "first_party": true,
       "owner_entity_id": "identiv",
       "participation_mode": "editorial",
-      "interval_minutes": 120,
+      "interval_minutes": 360,
       "tags": [
         "官方"
       ],
@@ -329,7 +329,7 @@
       "first_party": true,
       "owner_entity_id": "rain-alliance",
       "participation_mode": "editorial",
-      "interval_minutes": 120,
+      "interval_minutes": 360,
       "tags": [
         "官方"
       ],
@@ -369,7 +369,7 @@
       "first_party": false,
       "owner_entity_id": null,
       "participation_mode": "editorial",
-      "interval_minutes": 120,
+      "interval_minutes": 360,
       "tags": [
         "会员新闻"
       ],
@@ -402,7 +402,7 @@
       "first_party": true,
       "owner_entity_id": "gs1",
       "participation_mode": "editorial",
-      "interval_minutes": 120,
+      "interval_minutes": 360,
       "tags": [
         "官方"
       ],
@@ -436,7 +436,7 @@
       "first_party": false,
       "owner_entity_id": null,
       "participation_mode": "editorial",
-      "interval_minutes": 120,
+      "interval_minutes": 360,
       "tags": [
         "媒体"
       ],
@@ -471,7 +471,7 @@
       "first_party": true,
       "owner_entity_id": "zebra",
       "participation_mode": "editorial",
-      "interval_minutes": 120,
+      "interval_minutes": 360,
       "tags": [
         "官方"
       ],
@@ -505,7 +505,7 @@
       "first_party": true,
       "owner_entity_id": "walmart",
       "participation_mode": "editorial",
-      "interval_minutes": 120,
+      "interval_minutes": 360,
       "tags": [
         "官方"
       ],
@@ -540,7 +540,7 @@
       "first_party": true,
       "owner_entity_id": "nfc-forum",
       "participation_mode": "editorial",
-      "interval_minutes": 120,
+      "interval_minutes": 360,
       "tags": [
         "官方"
       ],
@@ -573,7 +573,7 @@
       "first_party": true,
       "owner_entity_id": "3gpp",
       "participation_mode": "editorial",
-      "interval_minutes": 120,
+      "interval_minutes": 360,
       "tags": [
         "官方"
       ],

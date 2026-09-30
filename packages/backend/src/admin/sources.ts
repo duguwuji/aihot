@@ -1,5 +1,6 @@
 // Source administration (F18): list, detail, preview (fetch without storing), edit, create with
 // duplicate checks, pause/resume and manual collection. Every change is audited.
+import { COLLECTION_INTERVAL_MINUTES } from "@rfidhot/industry/collection";
 import { z } from "zod";
 import { sql } from "../db.ts";
 import { enqueue, QUEUES } from "../jobs/queue.ts";
@@ -138,7 +139,7 @@ const CreateSchema = z
     config: z.record(z.string(), z.unknown()),
     tier: z.enum(["T1", "T1_5", "T2", "EXCLUDE_MP"]).default("T2"),
     participation_mode: z.enum(["editorial", "hot_signal", "isolated"]).default("editorial"),
-    interval_minutes: z.number().int().min(1).max(1440).default(30),
+    interval_minutes: z.number().int().min(1).max(1440).default(COLLECTION_INTERVAL_MINUTES),
     first_party: z.boolean().default(false),
     tags: z.array(z.string()).default([]),
     site_fulltext: z.boolean().default(false),
