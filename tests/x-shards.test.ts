@@ -104,7 +104,7 @@ test("one search reads a shard; each account gets its own posts, run and waterma
     SELECT DISTINCT ON (source_id) source_id, status, found_count, detail FROM fetch_runs WHERE source_id IN ${sql(IDS)} ORDER BY source_id, id DESC`;
   assert.deepEqual(runs.map((r) => [r.status, r.found_count, r.detail.accounts]), [["ok", 3, 3], ["ok", 1, 3], ["ok", 0, 3]]);
   const [next] = await sql<{ minutes: number; interval: number }[]>`SELECT round(extract(epoch FROM next_fetch_at - now()) / 60)::int AS minutes, interval_minutes AS interval FROM sources WHERE id = ${IDS[2]!}`;
-  assert.deepEqual([next!.minutes, next!.interval], [360, 360], "shards are read every six hours");
+  assert.deepEqual([next!.minutes, next!.interval], [1440, 1440], "shards are read daily");
 });
 
 test("a page failing after the first keeps what was read and goes on from there next run", async () => {
@@ -142,6 +142,8 @@ test("a failed search fails every account of the shard and moves no watermark", 
   const res = await collectXShard(`editorial:test-${T}`, IDS);
   assert.equal(res.status, "failed");
   for (const id of IDS) assert.equal((await cursorOf(id)).lastTweetId, watermark);
+  const delays = await sql<{ hours: number }[]>`SELECT extract(epoch FROM next_fetch_at - last_fetch_at) / 3600 AS hours FROM sources WHERE id IN ${sql(IDS)}`;
+  for (const delay of delays) assert.equal(Number(delay.hours), 24, "failed daily shards wait until the next day");
   const failed = await sql<{ n: number }[]>`
     SELECT count(*)::int AS n FROM (SELECT DISTINCT ON (source_id) status FROM fetch_runs WHERE source_id IN ${sql(IDS)} ORDER BY source_id, id DESC) r WHERE status = 'failed'`;
   assert.equal(failed[0]!.n, 3);
