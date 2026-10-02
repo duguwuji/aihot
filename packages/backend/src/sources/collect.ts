@@ -200,7 +200,7 @@ export async function collectSource(sourceId: string, opts: { force?: boolean } 
         fail_count = CASE WHEN ${budget} THEN fail_count ELSE fail_count + 1 END,
         last_error = ${message},
         health = CASE WHEN ${budget} THEN health WHEN fail_count + 1 >= 5 THEN 'failing' ELSE 'degraded' END,
-        next_fetch_at = now() + make_interval(mins => CASE WHEN ${budget} THEN 15 ELSE LEAST(interval_minutes * (fail_count + 2), 360) END),
+        next_fetch_at = now() + make_interval(mins => CASE WHEN ${budget} THEN 15 ELSE greatest(interval_minutes, LEAST(interval_minutes * (fail_count + 2), 360)) END),
         updated_at = now()
       WHERE id = ${sourceId}`;
     await sql`UPDATE fetch_runs SET status = 'failed', finished_at = now(), found_count = ${found}, new_count = ${created}, error = ${message} WHERE id = ${run!.id}`;
@@ -264,7 +264,7 @@ export async function collectXShard(key: string, sourceIds: string[]): Promise<{
           fail_count = CASE WHEN ${budget} THEN fail_count ELSE fail_count + 1 END,
           last_error = ${message},
           health = CASE WHEN ${budget} THEN health WHEN fail_count + 1 >= 5 THEN 'failing' ELSE 'degraded' END,
-          next_fetch_at = now() + make_interval(mins => CASE WHEN ${budget} THEN 15 ELSE LEAST(${minutes} * (fail_count + 2), 360) END),
+          next_fetch_at = now() + make_interval(mins => CASE WHEN ${budget} THEN 15 ELSE greatest(${minutes}, LEAST(${minutes} * (fail_count + 2), 360)) END),
           updated_at = now()
         WHERE id = ${m.id}`;
       await sql`UPDATE fetch_runs SET status = 'failed', finished_at = now(), error = ${message}, detail = ${sql.json({ shard: key, accounts: members.length })} WHERE id = ${runs.get(m.id)!}`;
