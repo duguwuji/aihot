@@ -1,5 +1,7 @@
 # 部署
 
+Google Cloud 的单机部署与 Cloudflare 域名配置见 [Google Cloud 部署](google-cloud.md)。
+
 ## 用 Docker（推荐）
 
 需要一台装了 Docker（带 Compose）的机器。云服务器建议至少 2 核、4 GB 内存，构建镜像时要用到。
