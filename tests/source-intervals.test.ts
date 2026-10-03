@@ -10,7 +10,7 @@ import { collectSource, scheduleDueSources } from "@rfidhot/backend/sources/coll
 import { tag } from "./setup.ts";
 
 const T = tag();
-const migration = readFileSync(new URL("../database/migrations/0040_daily_collection.sql", import.meta.url), "utf8");
+const migration = readFileSync(new URL("../database/migrations/0041_twice_daily_collection.sql", import.meta.url), "utf8");
 const server = http.createServer((req, res) => {
   if (req.url === "/failed") {
     res.writeHead(503);
@@ -49,39 +49,39 @@ test("the interval migration reschedules existing collectors without changing ex
       SELECT id, kind, interval_minutes, next_fetch_at FROM sources WHERE id = ANY(${fixtureIds}::text[])`;
     assert.equal(rows.length, 6);
     for (const row of rows) {
-      assert.equal(row.interval_minutes, row.kind === "external" ? 90 : 1440);
+      assert.equal(row.interval_minutes, row.kind === "external" ? 90 : 720);
       if (row.kind === "external" || row.kind === "mp_account") assert.equal(row.next_fetch_at.getTime(), pending.getTime());
       else if (row.kind === "rss") assert.ok(Math.abs(row.next_fetch_at.getTime() - Date.now()) < 5000, "overdue sources remain due");
-      else assert.equal(row.next_fetch_at.getTime(), recent.getTime() + 24 * 3600_000);
+      else assert.equal(row.next_fetch_at.getTime(), recent.getTime() + 12 * 3600_000);
     }
     throw rollback;
   }), (error) => error === rollback);
 });
 
-test("a successful collection waits one day and the minute scheduler does not fetch it early", async () => {
-  const id = `rss-daily-${T}`;
+test("a successful collection waits twelve hours and the minute scheduler does not fetch it early", async () => {
+  const id = `rss-twice-daily-${T}`;
   const [created] = await sql<{ interval_minutes: number }[]>`
     INSERT INTO sources (id, name, kind, config, cursor)
-    VALUES (${id}, 'Daily RSS', 'rss', ${sql.json({ feedUrl })}, ${sql.json({ initializedAt: new Date().toISOString() })})
+    VALUES (${id}, 'Twice-daily RSS', 'rss', ${sql.json({ feedUrl })}, ${sql.json({ initializedAt: new Date().toISOString() })})
     RETURNING interval_minutes`;
-  assert.equal(created!.interval_minutes, 1440, "new rows default to one day");
+  assert.equal(created!.interval_minutes, 720, "new rows default to twelve hours");
   const result = await collectSource(id);
   assert.equal(result.status, "ok");
   const [before] = await sql<{ last_fetch_at: Date; next_fetch_at: Date }[]>`SELECT last_fetch_at, next_fetch_at FROM sources WHERE id = ${id}`;
-  assert.equal(before!.next_fetch_at.getTime() - before!.last_fetch_at.getTime(), 24 * 3600_000);
+  assert.equal(before!.next_fetch_at.getTime() - before!.last_fetch_at.getTime(), 12 * 3600_000);
   await scheduleDueSources();
   const [after] = await sql<{ next_fetch_at: Date }[]>`SELECT next_fetch_at FROM sources WHERE id = ${id}`;
   assert.equal(after!.next_fetch_at.getTime(), before!.next_fetch_at.getTime());
 });
 
-test("a failed daily collection does not retry before the next day", async () => {
-  const id = `rss-daily-failed-${T}`;
+test("a failed twice-daily collection does not retry before twelve hours", async () => {
+  const id = `rss-twice-daily-failed-${T}`;
   await sql`INSERT INTO sources (id, name, kind, config)
-    VALUES (${id}, 'Failed daily RSS', 'rss', ${sql.json({ feedUrl: feedUrl.replace("/feed.xml", "/failed") })})`;
+    VALUES (${id}, 'Failed twice-daily RSS', 'rss', ${sql.json({ feedUrl: feedUrl.replace("/feed.xml", "/failed") })})`;
   const result = await collectSource(id);
   assert.equal(result.status, "failed");
   const [before] = await sql<{ last_fetch_at: Date; next_fetch_at: Date }[]>`SELECT last_fetch_at, next_fetch_at FROM sources WHERE id = ${id}`;
-  assert.equal(before!.next_fetch_at.getTime() - before!.last_fetch_at.getTime(), 24 * 3600_000);
+  assert.equal(before!.next_fetch_at.getTime() - before!.last_fetch_at.getTime(), 12 * 3600_000);
   await scheduleDueSources();
   const [after] = await sql<{ next_fetch_at: Date }[]>`SELECT next_fetch_at FROM sources WHERE id = ${id}`;
   assert.equal(after!.next_fetch_at.getTime(), before!.next_fetch_at.getTime());
