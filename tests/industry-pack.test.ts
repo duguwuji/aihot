@@ -23,7 +23,7 @@ test("RFID directory resolves its entities, tags and supported source configs", 
   }
   for (const s of sources) {
     assertSupportedConfig(s.kind, s.config);
-    assert.equal(s.interval_minutes, 1440, `${s.id}: daily collection interval`);
+    assert.equal(s.interval_minutes, 720, `${s.id}: twelve-hour collection interval`);
   }
 });
 
